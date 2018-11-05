@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div id="root">
+        <div class="main">
+            <div :class="[index === currChannelPlay ? 'on-channel' : '', 
+                index === currScrollChannelPlay ? 'on-scroll': '',
+                channel.scrolltype === 1 ? 'scroll': '']"
+                ref="channel" :data-channel="channel.channelname" class="channel" v-for="(channel, index) in channelData"
+                :key="index">
+                <template v-if="index === currScrollChannelPlay">
+                    <div :class="[sindex === currContentScrollIndex ? 'open-marquee': '']" class="marquee" :data-title="s.title"
+                        v-for="(s, sindex) in channel.scrool_content" :key="sindex">
+                        <template v-for="(item, ssindex) in 2" :key="ssindex">
+                            <p :class="[ssindex === 0 ? 'first': 'last' ]">{{ s.scroll_content }}</p>
+                        </template>
+                    </div>
+                </template>
+                <template v-if="index === currChannelPlay">
+                    <div :class="[cindex === currContentIndex ? 'on-contents': '']" :data-title="child.title" class="section"
+                        v-for="(child, cindex) in channel.contents" :key="cindex">
+                        <!-- 纯图片 -->
+                        <template v-if="child.showtype === 3">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" v-for="(slide, index) in child.images" :key="index">
+                                        <img :src="slide.imageurl" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <!-- 纯图片 -->
+                        <!-- 上视频下图片 -->
+                        <template v-if="child.showtype === 4">
+                            <div class="video">
+                                <video :src="child.video.videourl" height="300" muted loop autoplay controls></video>
+                            </div>
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
+                                        <img :src="slide.imageurl" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <!-- 上视频下图片 -->
+                        <!-- 上图片下视频 -->
+                        <template v-if="child.showtype === 5">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
+                                        <img :src="slide.imageurl" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="video">
+                                <video :src="child.video.videourl" height="300" muted loop autoplay controls></video>
+                            </div>
+                        </template>
+                        <!-- 上图片下视频 -->
+                    </div>
+                </template>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/vue.min.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<script src="./index.js"></script>
+
+</html>
