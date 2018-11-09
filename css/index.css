@@ -90,17 +90,35 @@ p {
 
 /* 定义第一个的animation：时长 动画名字 匀速 循环 正常播放 */
 .first {
+    -webkit-animation: 40s first-marquee linear infinite normal;
+    -moz-animation: 40s first-marquee linear infinite normal;
     animation: 40s first-marquee linear infinite normal;
     padding-right: 70%;
 }
 
 /* 因为要在第一个播完之前就得出现第二个span，所以就延迟12s才播放 */
 .last {
+    -webkit-animation: 40s first-marquee linear 20s infinite normal;
+    -moz-animation: 40s first-marquee linear 20s infinite normal;
     animation: 40s first-marquee linear 20s infinite normal;
     padding-right: 53%;
 }
 
 @keyframes first-marquee {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    /* 向左移动 */
+    100% {
+        -webkit-transform: translate3d(-200%, 0, 0);
+        transform: translate3d(-200%, 0, 0);
+        display: none;
+    }
+}
+
+@-moz-keyframes first-marquee {
     0% {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);

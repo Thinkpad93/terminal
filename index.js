@@ -2,7 +2,7 @@ var vm = new Vue({
     el: "#root",
     data: {
 
-        minutes: 60000, //每一分钟刷新一次
+        minutes: 30000, //每一分钟刷新一次
         timer: null, //内容定时器
         timerScroll: null,
 
@@ -76,13 +76,9 @@ var vm = new Vue({
 
                 if (now > start && now < end) {
                     if (hms >= playstarttime && hms <= playendtime) {
-                        //保存当前要播放的栏目
                         isPlayChannel.push(channels);
-                        //console.log("有栏目要播放了！");
                     }
-                } else {
-                    //console.log("当前时间没有栏目要播放！");
-                }
+                } else {}
             }
             if (isPlayChannel.length) {
                 var noScrollChannel = [];
@@ -98,7 +94,6 @@ var vm = new Vue({
                 //非滚动的栏目内容
                 if (noScrollChannel.length) {
                     var channelObj = this.handleComputed(isPlayChannel, noScrollChannel);
-                    console.log(channelObj);
                     if (Object.keys(channelObj).length) {
                         this.currChannelPlay = channelObj.index;
                         if (this.currChannelPlaying == this.currChannelPlay) {
@@ -114,14 +109,13 @@ var vm = new Vue({
                 //滚动的栏目内容
                 if (scrollChannel.length) {
                     var scrollChannelObj = this.handleComputed(isPlayChannel, scrollChannel);
-                    console.log(scrollChannelObj);
                     if (Object.keys(scrollChannelObj).length) {
                         this.currScrollChannelPlay = scrollChannelObj.index;
                         if (this.currScrollChannelPlaying == this.currScrollChannelPlay) {
                             //return false;
                         } else {
                             this.currScrollChannelPlaying = this.currScrollChannelPlay;
-                            this.runPlayScrollChannelContents(scrollChannelObj.channel.scrool_content);
+                            this.runPlayScrollChannelContents(scrollChannelObj.channel.scrollContents);
                         }
                     }
                 } else {
@@ -274,6 +268,7 @@ var vm = new Vue({
                 autoplay: {
                     delay: that.delay,
                 },
+                speed: 1000,
                 loop: true,
                 noSwiping: true,
                 noSwipingClass: 'stop-swiping',
