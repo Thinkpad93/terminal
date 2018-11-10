@@ -209,7 +209,7 @@ var vm = new Vue({
         handleCheckScrollContents(durationArr) {
             if (this.durationScroll > 0) {
                 this.durationScroll = this.durationScroll - 1;
-                console.log(this.durationScroll);
+                //console.log(this.durationScroll);
             } else {
                 if (this.currContentScrollIndex < this.contentsScrollLen) {
                     this.currContentScrollIndex++;
@@ -280,7 +280,7 @@ var vm = new Vue({
         this.getPlayChannel();
         //定时器
         setInterval(function () {
-            console.log("10")
+            console.log("重新请求");
             that.getPlayChannel()
         }, that.minutes);
     },
