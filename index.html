@@ -40,7 +40,7 @@
                         <template v-if="child.showtype === 3">
                             <div class="swiper-container">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide" v-for="(slide, index) in child.images" :key="index">
+                                    <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
                                         <img :src="slide.imageurl" alt="" width="1080" height="1590">
                                     </div>
                                 </div>

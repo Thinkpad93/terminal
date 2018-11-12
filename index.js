@@ -2,7 +2,7 @@ var vm = new Vue({
     el: "#root",
     data: {
 
-        minutes: 30000, //每一分钟刷新一次
+        minutes: 60000, //每一分钟刷新一次
         timer: null, //内容定时器
         timerScroll: null,
 
@@ -182,6 +182,8 @@ var vm = new Vue({
         },
         //播放非滚动栏目的内容
         runPlayChannelContents: function (contents) {
+            console.log(this.currChannelPlay);
+            console.log(this.currChannelPlaying);
             var that = this;
             var durationArr = []; //时长
             if (Array.isArray(contents)) {
@@ -246,9 +248,9 @@ var vm = new Vue({
         },
         //获取图片需要播放的时长
         handleImgdelay(singleContents) {
-            var duration = singleContents.duration;
-            var len = singleContents.images.length;
-            this.delay = Math.floor(duration / len) * 1000;
+            var duration = singleContents.duration; //内容时长
+            var len = singleContents.images.length; //图片长度
+            this.delay = Math.floor(duration / len) * 1000; //分配获得每张图片需要显示的时长
         },
         //获取学校播放列表
         getPlayChannel: function () {
@@ -266,13 +268,17 @@ var vm = new Vue({
             var that = this;
             var mySwiper = new Swiper('.swiper-container', {
                 autoplay: {
-                    delay: that.delay,
+                    delay: 30000,
                 },
-                speed: 1000,
-                loop: true,
+                speed: 800,
+                loop: false,
                 noSwiping: true,
                 noSwipingClass: 'stop-swiping',
+                init: true,
             })
+            this.$nextTick(function () {
+
+            });
         },
     },
     mounted: function () {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Swiper</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <main class="main">
+        <div class="swiper-container" id="swiper1">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="./image/201811081610.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081611.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081612.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081613.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081614.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081615.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081616.jpg" alt="" width="1080" height="1590">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./image/201811081617.jpg" alt="" width="1080" height="1590">
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="./js/swiper.min.js"></script>
+<script>
+    var mySwiper = new Swiper('#swiper1', {
+        autoplay: {
+            delay: 5000
+        },
+        loop: true,
+        speed: 800,
+    })
+</script>
+
+</html>

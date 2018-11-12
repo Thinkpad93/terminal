@@ -8,7 +8,7 @@
       "priority": 1,
       "validtype": 1,
       "validstarttime": "2018-10-20",
-      "validendtime": "2018-12-02",
+      "validendtime": "2018-10-30",
       "contents": [],
       "scrollContents": [{
         "title": "统治后期",
@@ -28,7 +28,7 @@
       "priority": 5,
       "validtype": 1,
       "validstarttime": "2018-10-11",
-      "validendtime": "2018-11-20",
+      "validendtime": "2018-10-20",
       "contents": [],
       "scrollContents": [{
         "title": "铲除奸佞",
@@ -177,17 +177,17 @@
     },
     {
       "playstarttime": "09:00:00",
-      "playendtime": "18:50:00",
+      "playendtime": "22:00:00",
       "channelname": "明清小说",
       "scrolltype": 0,
       "priority": 5,
       "validtype": 1,
       "validstarttime": "2018-10-26",
-      "validendtime": "2018-12-04",
+      "validendtime": "2018-12-12",
       "scrollContents": [],
       "contents": [{
           "title": "西游记",
-          "duration": "100",
+          "duration": "50",
           "showtype": 3,
           "images": [{
               "imageurl": "/image/201811081610.jpg",
@@ -204,12 +204,36 @@
                 "size": 41184440,
                 "filename": "201811081611.jpg"
               }
+            },
+            {
+              "imageurl": "/image/201811081612.jpg",
+              "update_info": {
+                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                "size": 41184440,
+                "filename": "201811081612.jpg"
+              }
+            },
+            {
+              "imageurl": "/image/201811081613.jpg",
+              "update_info": {
+                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                "size": 41184440,
+                "filename": "201811081613.jpg"
+              }
+            },
+            {
+              "imageurl": "/image/201811081614.jpg",
+              "update_info": {
+                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                "size": 41184440,
+                "filename": "201811081614.jpg"
+              }
             }
           ]
         },
         {
           "title": "续资治通鉴长编",
-          "duration": "200",
+          "duration": "50",
           "showtype": 5,
           "video": {
             "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
@@ -235,10 +259,10 @@
       "playendtime": "19:50:00",
       "channelname": "白话小说",
       "scrolltype": 0,
-      "priority": 5,
+      "priority": 4,
       "validtype": 1,
       "validstarttime": "2018-10-26",
-      "validendtime": "2018-11-05",
+      "validendtime": "2018-12-05",
       "scrollContents": [],
       "contents": [{
           "title": "推荐答案",
@@ -253,11 +277,11 @@
             }
           },
           "images": [{
-            "imageurl": "/image/201810232045.jpg",
+            "imageurl": "/image/201811081616.jpg",
             "update_info": {
               "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
               "size": 41184440,
-              "filename": "201810232045.png"
+              "filename": "201811081616.jpg"
             }
           }]
         },
@@ -274,11 +298,11 @@
             }
           },
           "images": [{
-            "imageurl": "/image/medium.jpg",
+            "imageurl": "/image/201811081615.jpg",
             "update_info": {
               "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
               "size": 41184440,
-              "filename": "medium.png"
+              "filename": "201811081615.jpg"
             }
           }]
         }
