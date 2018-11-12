@@ -22,9 +22,9 @@
             <div :class="[index === currChannelPlay ? 'on-channel' : '', 
                 index === currScrollChannelPlay ? 'on-scroll': '',
                 channel.scrolltype === 1 ? 'scroll': '']"
-                ref="channel" :channel="channel.channelname" :start="channel.validstarttime" :end="channel.validendtime"
-                :playstart="channel.playstarttime" :playend="channel.playendtime" class="channel" v-for="(channel, index) in channelData"
-                :key="index">
+                ref="channel" :channel="channel.channelname" :priority="channel.priority" :start="channel.validstarttime"
+                :end="channel.validendtime" :playstart="channel.playstarttime" :playend="channel.playendtime" class="channel"
+                v-for="(channel, index) in channelData" :key="index">
                 <template v-if="index === currScrollChannelPlay">
                     <div :class="[sindex === currContentScrollIndex ? 'open-marquee': '']" class="marquee" :data-title="s.title"
                         v-for="(s, sindex) in channel.scrollContents" :key="sindex">
