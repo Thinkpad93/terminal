@@ -133,12 +133,16 @@ p {
 }
 
 .video {
+    overflow: hidden;
+    position: relative;
     background-color: #fff;
 }
 
 video {
-    width: 100%;
+    width: 1080px;
+    height: 710px;
     display: block;
+    object-fit: cover;
 }
 
 img {

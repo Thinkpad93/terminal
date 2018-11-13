@@ -16,8 +16,6 @@
 
 <body>
     <div id="root">
-        <div class="view" style="display: none;">
-        </div>
         <div class="main">
             <div :class="[index === currChannelPlay ? 'on-channel' : '', 
                 index === currScrollChannelPlay ? 'on-scroll': '',
@@ -36,47 +34,50 @@
                 <template v-if="index === currChannelPlay">
                     <div :class="[cindex === currContentIndex ? 'on-contents': '']" :data-title="child.title" class="section"
                         v-for="(child, cindex) in channel.contents" :key="cindex">
-                        <!-- 纯图片 -->
-                        <template v-if="child.showtype === 3">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                                        <img :src="slide.imageurl" alt="" width="1080" height="1590">
+                        <template v-if="cindex === currContentIndex">
+                            <!-- 纯图片 -->
+                            <template v-if="child.showtype === 3">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
+                                            :key="index">
+                                            <img :src="slide.imageurl" alt="" width="1080" height="1590">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </template>
-                        <!-- 纯图片 -->
-                        <!-- 上视频下图片 -->
-                        <template v-if="child.showtype === 4">
-                            <div class="video">
-                                <video :src="child.video.videourl" width="1080" height="710" muted loop autoplay
-                                    controls></video>
-                            </div>
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                                        <img :src="slide.imageurl" alt="" width="1080" height="880">
+                            </template>
+                            <!-- 纯图片 -->
+                            <!-- 上视频下图片 -->
+                            <template v-if="child.showtype === 4">
+                                <div class="video">
+                                    <video :src="child.video.videourl" loop autoplay controls></video>
+                                </div>
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
+                                            :key="index">
+                                            <img :src="slide.imageurl" alt="" width="1080" height="880">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </template>
-                        <!-- 上视频下图片 -->
-                        <!-- 上图片下视频 -->
-                        <template v-if="child.showtype === 5">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                                        <img :src="slide.imageurl" alt="" width="1080" height="880">
+                            </template>
+                            <!-- 上视频下图片 -->
+                            <!-- 上图片下视频 -->
+                            <template v-if="child.showtype === 5">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
+                                            :key="index">
+                                            <img :src="slide.imageurl" alt="" width="1080" height="880">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="video">
-                                <video :src="child.video.videourl" width="1080" height="710" muted loop autoplay
-                                    controls></video>
-                            </div>
+                                <div class="video">
+                                    <video :src="child.video.videourl" loop autoplay controls></video>
+                                </div>
+                            </template>
+                            <!-- 上图片下视频 -->
                         </template>
-                        <!-- 上图片下视频 -->
                     </div>
                 </template>
 
@@ -85,7 +86,7 @@
     </div>
 </body>
 <script src="./js/vue.min.js"></script>
-<script src="./js/axios.min.js"></script>
+<script src="./school_panel_content.js"></script>
 <script src="./js/swiper.min.js"></script>
 <script src="./index.js"></script>
 

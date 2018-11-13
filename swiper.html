@@ -92,7 +92,7 @@
         el: "#root",
         components: {},
         data: {
-            minutes: 60000, //每一分钟刷新一次
+            minutes: 10000, //每一分钟刷新一次
             timer: null, //内容定时器
             timerScroll: null,
 
@@ -191,7 +191,9 @@
                             this.currChannelPlay = channelObj.index;
                             if (this.currChannelPlaying == this.currChannelPlay) {
                                 //return false;
+                                console.log("真");
                             } else {
+                                console.log("假");
                                 this.currChannelPlaying = this.currChannelPlay;
                                 this.runPlayChannelContents(channelObj.channel.contents); //播放内容
                             }
@@ -350,6 +352,7 @@
                     that.$nextTick(function () {
                         this.channelData = response.data.playchannel;
                         this.getRunPlayChannel();
+                        this.swiperInit();
                     });
                 }).catch(function (error) {
                     return error;
@@ -382,7 +385,8 @@
             }, that.minutes);
         },
         updated: function () {
-            this.swiperInit();
+            console.log("触发了!!!!");
+            //this.swiperInit();
         }
     });
 </script>

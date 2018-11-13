@@ -71,8 +71,11 @@ var vm = new Vue({
                 var playstarttime = channels.playstarttime;
                 var playendtime = channels.playendtime;
 
-                var start = new Date(validstarttime + " " + playstarttime).getTime();
-                var end = new Date(validendtime + " " + playendtime).getTime();
+                var startTime = (validstarttime + " " + playstarttime).replace(/-/g, '/');
+                var endTime = (validendtime + " " + playendtime).replace(/-/g, '/');
+
+                var start = new Date(startTime).getTime();
+                var end = new Date(endTime).getTime();
 
                 if (now > start && now < end) {
                     if (hms >= playstarttime && hms <= playendtime) {
@@ -255,30 +258,20 @@ var vm = new Vue({
         //获取学校播放列表
         getPlayChannel: function () {
             var that = this;
-            axios.get('./channels.json', {}).then(function (response) {
-                that.$nextTick(function () {
-                    this.channelData = response.data.playchannel;
-                    this.getRunPlayChannel();
-                });
-            }).catch(function (error) {
-                return error;
-            })
+            this.channelData = channels.playchannel;
+            this.getRunPlayChannel();
         },
         swiperInit: function () {
             var that = this;
             var mySwiper = new Swiper('.swiper-container', {
                 autoplay: {
-                    delay: 30000,
+                    delay: 15000,
                 },
-                speed: 800,
+                speed: 1000,
                 loop: false,
                 noSwiping: true,
-                noSwipingClass: 'stop-swiping',
-                init: true,
+                noSwipingClass: 'stop-swiping'
             })
-            this.$nextTick(function () {
-
-            });
         },
     },
     mounted: function () {

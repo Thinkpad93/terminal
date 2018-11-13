@@ -1,0 +1,296 @@
+var channels = {
+    "schoolname": "幼儿园",
+    "playchannel": [{
+            "playstarttime": "09:03:00",
+            "playendtime": "20:10:00",
+            "channelname": "大明弘治十八年",
+            "scrolltype": 1,
+            "priority": 1,
+            "validtype": 1,
+            "validstarttime": "2018-10-20",
+            "validendtime": "2018-10-30",
+            "contents": [],
+            "scrollContents": [{
+                "title": "统治后期",
+                "duration": "100",
+                "scroll_content": "由于孝宗多难的童年使得他的身体一直不好，他希望通过佛道之术能改变自己的身体状况。因此一些奸佞之辈再次混入宫中，再次祸乱朝政。"
+            }, {
+                "title": "大力整顿朝纲",
+                "duration": "200",
+                "scroll_content": "后来李广畏罪自杀，孝宗以为李广家中有天书，命人搜寻，却搜出了李广贪污、受贿的账本，孝宗这才醒悟。"
+            }]
+        },
+        {
+            "playstarttime": "19:20:00",
+            "playendtime": "19:22:00",
+            "channelname": "弘治中兴",
+            "scrolltype": 1,
+            "priority": 5,
+            "validtype": 1,
+            "validstarttime": "2018-10-11",
+            "validendtime": "2018-10-20",
+            "contents": [],
+            "scrollContents": [{
+                "title": "铲除奸佞",
+                "duration": "100",
+                "scroll_content": "他的治国思路是很开放的，他不拘泥守旧，敢于否定前任的政策，即他的父亲明宪宗的既定政策"
+            }, {
+                "title": "重用贤良",
+                "duration": "200",
+                "scroll_content": "在人事安排上，朱祐樘完全来了一次大换血，他对前朝的纸糊三阁老、泥塑六尚书及奸佞小人如侍郎李孜省"
+            }]
+        },
+        {
+            "playstarttime": "08:28:00",
+            "playendtime": "23:40:00",
+            "channelname": "广东凉茶",
+            "scrolltype": 0,
+            "priority": 2,
+            "validtype": 1,
+            "validstarttime": "2018-10-29",
+            "validendtime": "2020-11-10",
+            "scrollContents": [],
+            "contents": [{
+                    "title": "禅与摩托车维修艺术",
+                    "duration": "100",
+                    "showtype": 4,
+                    "video": {
+                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                        }
+                    },
+                    "images": [{
+                            "imageurl": "/image/201810232043.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201810232043.png"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/2018102260938.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "2018102260938.png"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201811081617.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081617.jpg"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "title": "说文解字",
+                    "duration": "1000",
+                    "showtype": 5,
+                    "video": {
+                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                        }
+                    },
+                    "images": [{
+                            "imageurl": "/image/201810260937.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201810260937.png"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201810260940.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201810260940.png"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "playstarttime": "14:20:00",
+            "playendtime": "15:10:00",
+            "channelname": "国故论衡",
+            "scrolltype": 0,
+            "priority": 4,
+            "validtype": 1,
+            "validstarttime": "2018-10-26",
+            "validendtime": "2018-11-04",
+            "scrollContents": [],
+            "contents": [{
+                    "title": "天行健",
+                    "duration": "100",
+                    "showtype": 4,
+                    "video": {
+                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                        }
+                    },
+                    "images": [{
+                            "imageurl": "/image/201810232045.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201810232045.png"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201810232046.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201810232046.png"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "title": "说人话",
+                    "duration": "100",
+                    "showtype": 3,
+                    "images": [{
+                        "imageurl": "/image/201810232043.jpg",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "201810232043.png"
+                        }
+                    }]
+                }
+            ]
+        },
+        {
+            "playstarttime": "09:00:00",
+            "playendtime": "22:00:00",
+            "channelname": "明清小说",
+            "scrolltype": 0,
+            "priority": 5,
+            "validtype": 1,
+            "validstarttime": "2018-10-26",
+            "validendtime": "2018-12-12",
+            "scrollContents": [],
+            "contents": [{
+                    "title": "西游记",
+                    "duration": "30",
+                    "showtype": 3,
+                    "images": [{
+                            "imageurl": "/image/201811081610.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081610.jpg"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201811081611.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081611.jpg"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201811081612.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081612.jpg"
+                            }
+                        },
+                    ]
+                },
+                {
+                    "title": "续资治通鉴长编",
+                    "duration": "500",
+                    "showtype": 4,
+                    "video": {
+                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                        }
+                    },
+                    "images": [{
+                        "imageurl": "/image/201810232046.jpg",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "201810232046.png"
+                        }
+                    }]
+                }
+            ]
+        },
+        {
+            "playstarttime": "15:50:00",
+            "playendtime": "19:50:00",
+            "channelname": "白话小说",
+            "scrolltype": 0,
+            "priority": 4,
+            "validtype": 1,
+            "validstarttime": "2018-10-26",
+            "validendtime": "2018-12-05",
+            "scrollContents": [],
+            "contents": [{
+                    "title": "推荐答案",
+                    "duration": "20",
+                    "showtype": 5,
+                    "video": {
+                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                        }
+                    },
+                    "images": [{
+                        "imageurl": "/image/201811081616.jpg",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "201811081616.jpg"
+                        }
+                    }]
+                },
+                {
+                    "title": "章太炎",
+                    "duration": "30",
+                    "showtype": 4,
+                    "video": {
+                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                        }
+                    },
+                    "images": [{
+                        "imageurl": "/image/201811081615.jpg",
+                        "update_info": {
+                            "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                            "size": 41184440,
+                            "filename": "201811081615.jpg"
+                        }
+                    }]
+                }
+            ]
+        }
+    ]
+}
