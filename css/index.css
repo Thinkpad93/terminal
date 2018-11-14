@@ -3,7 +3,7 @@
 html,
 body {
     min-height: 100%;
-    background-color: #949494;
+    background-color: #fff;
 }
 
 p {
@@ -71,6 +71,7 @@ p {
     white-space: nowrap;
     overflow: hidden;
     height: 100%;
+    font-size: 20px;
     padding: 0 10px;
     position: relative;
     display: none !important;
@@ -82,7 +83,7 @@ p {
 
 .marquee p {
     position: absolute;
-    top: 32%;
+    top: 26%;
     left: 100%;
     z-index: 99;
 }

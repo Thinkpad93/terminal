@@ -8,7 +8,7 @@ var channels = {
             "priority": 1,
             "validtype": 1,
             "validstarttime": "2018-10-20",
-            "validendtime": "2018-10-30",
+            "validendtime": "2018-12-30",
             "contents": [],
             "scrollContents": [{
                 "title": "统治后期",
@@ -187,7 +187,7 @@ var channels = {
             "scrollContents": [],
             "contents": [{
                     "title": "西游记",
-                    "duration": "30",
+                    "duration": "3000",
                     "showtype": 3,
                     "images": [{
                             "imageurl": "/image/201811081610.jpg",

@@ -50,7 +50,7 @@
                             <!-- 上视频下图片 -->
                             <template v-if="child.showtype === 4">
                                 <div class="video">
-                                    <video :src="child.video.videourl" loop autoplay controls></video>
+                                    <video ref="video" :src="child.video.videourl" loop autoplay></video>
                                 </div>
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="video">
-                                    <video :src="child.video.videourl" loop autoplay controls></video>
+                                    <video ref="video" :src="child.video.videourl" loop autoplay></video>
                                 </div>
                             </template>
                             <!-- 上图片下视频 -->

@@ -5,10 +5,10 @@
       "playendtime": "20:10:00",
       "channelname": "大明弘治十八年",
       "scrolltype": 1,
-      "priority": 1,
+      "priority": 5,
       "validtype": 1,
       "validstarttime": "2018-10-20",
-      "validendtime": "2018-10-30",
+      "validendtime": "2018-12-30",
       "contents": [],
       "scrollContents": [{
         "title": "统治后期",

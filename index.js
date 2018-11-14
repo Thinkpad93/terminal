@@ -86,7 +86,7 @@ var vm = new Vue({
             if (isPlayChannel.length) {
                 var noScrollChannel = [];
                 var scrollChannel = [];
-                //检查栏目属性 非滚动和滚动
+                //检查栏目属性，非滚动和滚动
                 for (var c = 0; c < isPlayChannel.length; c++) {
                     if (isPlayChannel[c].scrolltype === 1) {
                         scrollChannel.push(isPlayChannel[c]);
@@ -94,13 +94,14 @@ var vm = new Vue({
                         noScrollChannel.push(isPlayChannel[c]);
                     }
                 }
+
                 //非滚动的栏目内容
                 if (noScrollChannel.length) {
-                    var channelObj = this.handleComputed(isPlayChannel, noScrollChannel);
+                    var channelObj = this.handleComputed(noScrollChannel);
                     if (Object.keys(channelObj).length) {
                         this.currChannelPlay = channelObj.index;
                         if (this.currChannelPlaying == this.currChannelPlay) {
-                            //return false;
+                            //...
                         } else {
                             this.currChannelPlaying = this.currChannelPlay;
                             this.runPlayChannelContents(channelObj.channel.contents); //播放内容
@@ -109,13 +110,14 @@ var vm = new Vue({
                 } else {
                     this.currChannelPlay = -1;
                 }
+
                 //滚动的栏目内容
                 if (scrollChannel.length) {
-                    var scrollChannelObj = this.handleComputed(isPlayChannel, scrollChannel);
+                    var scrollChannelObj = this.handleComputed(scrollChannel);
                     if (Object.keys(scrollChannelObj).length) {
                         this.currScrollChannelPlay = scrollChannelObj.index;
                         if (this.currScrollChannelPlaying == this.currScrollChannelPlay) {
-                            //return false;
+                            //...
                         } else {
                             this.currScrollChannelPlaying = this.currScrollChannelPlay;
                             this.runPlayScrollChannelContents(scrollChannelObj.channel.scrollContents);
@@ -128,7 +130,7 @@ var vm = new Vue({
             }
         },
         //处理栏目并显示
-        handleComputed: function (isPlayChannel, channels) {
+        handleComputed: function (channels) {
             var scrolltype;
             var priorityArr = [];
             var index = null;
@@ -214,7 +216,6 @@ var vm = new Vue({
         handleCheckScrollContents(durationArr) {
             if (this.durationScroll > 0) {
                 this.durationScroll = this.durationScroll - 1;
-                //console.log(this.durationScroll);
             } else {
                 if (this.currContentScrollIndex < this.contentsScrollLen) {
                     this.currContentScrollIndex++;
@@ -257,7 +258,6 @@ var vm = new Vue({
         },
         //获取学校播放列表
         getPlayChannel: function () {
-            var that = this;
             this.channelData = channels.playchannel;
             this.getRunPlayChannel();
         },
@@ -265,9 +265,9 @@ var vm = new Vue({
             var that = this;
             var mySwiper = new Swiper('.swiper-container', {
                 autoplay: {
-                    delay: 15000,
+                    delay: 30000,
                 },
-                speed: 1000,
+                speed: 800,
                 loop: false,
                 noSwiping: true,
                 noSwipingClass: 'stop-swiping'
