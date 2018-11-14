@@ -2,7 +2,7 @@ var vm = new Vue({
     el: "#root",
     data: {
 
-        minutes: 60000, //每一分钟刷新一次
+        minutes: 30000, //每一分钟刷新一次
         timer: null, //内容定时器
         timerScroll: null,
 
