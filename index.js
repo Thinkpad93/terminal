@@ -271,7 +271,7 @@ var vm = new Vue({
                 loop: false,
                 noSwiping: true,
                 noSwipingClass: 'stop-swiping'
-            })
+            });
         },
     },
     mounted: function () {

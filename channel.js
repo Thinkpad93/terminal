@@ -1,4 +1,5 @@
 var vm = new Vue({
+    el: "#root",
     data: {
         //定时器
         timer: null,
@@ -47,6 +48,27 @@ var vm = new Vue({
         getScrollContens: function () {
             var that = this;
             var scrollData = this.scrollData;
+            var now = new Date().getTime();
+            var isPlayScroll = [];
+            for (var s = 0; s < scrollData.length; s++) {
+                var scrolls = scrollData[s];
+                var validstarttime = scrolls.validstarttime; //滚动开始时间
+                var validendtime = scrolls.validendtime; //滚动结束时间
+                //字符串转时间戳
+                var startTime = validstarttime.replace(/-/g, '/');
+                var endTime = validendtime.replace(/-/g, '/');
+                var start = new Date(startTime).getTime();
+                var end = new Date(endTime).getTime();
+                //跟当前时间对比时间戳
+                if (now > start && now < end) {
+                    isPlayScroll.push(scrolls);
+                }
+            }
+
+            //找到滚动内容
+            if (isPlayScroll.length) {
+
+            }
         },
         //根据日期时间获取需要播放的栏目
         getPlayChannels: function () {
@@ -164,6 +186,21 @@ var vm = new Vue({
             this.getPlayChannels();
             this.getScrollContens();
         },
+        //自动播放视频
+        autoPlayVideo: function () {
+            var video = document.getElementById('video');
+        },
+        swiperInit: function () {
+            var mySwiper = new Swiper('.swiper-container', {
+                autoplay: {
+                    delay: 30000,
+                },
+                speed: 800,
+                loop: false,
+                noSwiping: true,
+                noSwipingClass: 'stop-swiping'
+            });
+        },
         init: function () {
             this.getSchoolData();
         },
@@ -171,4 +208,9 @@ var vm = new Vue({
     mounted: function () {
         this.init();
     },
-}).$mount("#root");
+    updated: function () {
+        console.log("DOM更新了!")
+        this.swiperInit();
+        this.autoPlayVideo();
+    },
+});
