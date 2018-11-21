@@ -1,6 +1,10 @@
 var vm = new Vue({
     el: "#root",
     data: {
+        swiper: null,
+        //每一分钟刷新一次
+        minutes: 30000,
+
         //定时器
         timer: null,
         timerScroll: null,
@@ -15,10 +19,19 @@ var vm = new Vue({
 
         //滚动内容数据
         scrollData: [],
+        marquee: [],
 
         //栏目数据
         channelData: []
 
+    },
+    watch: {
+        channelContenIndex: function (newVal, oldVal) {
+            console.log(newVal, oldVal);
+            //console.log("内容切换了");
+            this.swiperInit();
+            this.autoPlayVideo();
+        }
     },
     methods: {
         //添加补0操作
@@ -64,10 +77,10 @@ var vm = new Vue({
                     isPlayScroll.push(scrolls);
                 }
             }
-
             //找到滚动内容
             if (isPlayScroll.length) {
-
+                //console.log(isPlayScroll);
+                this.marquee = isPlayScroll;
             }
         },
         //根据日期时间获取需要播放的栏目
@@ -94,10 +107,9 @@ var vm = new Vue({
                         isPlayChannel.push(channels); //
                     }
                 } else {
-
+                    //...
                 }
             }
-
             //找到栏目
             if (isPlayChannel.length) {
                 var o = this.handleChannelComputed(isPlayChannel)
@@ -110,12 +122,11 @@ var vm = new Vue({
                         this.playChannelContens(o.showChannels.contents);
                     }
                 }
+
             } else {
                 //如果没有找到栏目，则不显示
                 this.channelIndex = -1;
             }
-
-
         },
         //处理栏目并返回需要显示的栏目
         handleChannelComputed: function (channels) {
@@ -141,7 +152,6 @@ var vm = new Vue({
         },
         //播放栏目内容
         playChannelContens: function (contens) {
-            console.log(contens);
             var that = this;
             var durationArr = []; //时长
             if (Array.isArray(contens)) {
@@ -160,7 +170,6 @@ var vm = new Vue({
                     this.timer = setInterval(function () {
                         that.handleCheckContents(durationArr);
                     }, 1000);
-
                 }
             }
         },
@@ -168,7 +177,7 @@ var vm = new Vue({
         handleCheckContents: function (durationArr) {
             if (this.channelDuration > 0) {
                 this.channelDuration = this.channelDuration - 1;
-                console.log(this.channelDuration);
+                //console.log(this.channelDuration);
             } else {
                 if (this.channelContenIndex < this.channelContenLen) {
                     this.channelContenIndex++;
@@ -182,23 +191,30 @@ var vm = new Vue({
         //获取数据
         getSchoolData: function () {
             this.channelData = channels.playchannel; //栏目数据
-            this.scrollData = channels.scroll; //滚动数据
+            this.scrollData = channels.scrollContents; //滚动数据
             this.getPlayChannels();
             this.getScrollContens();
         },
         //自动播放视频
         autoPlayVideo: function () {
-            var video = document.getElementById('video');
+            this.$nextTick(function () {
+                var video = document.getElementById('video');
+                if (video) {
+                    video.play();
+                }
+            });
         },
         swiperInit: function () {
-            var mySwiper = new Swiper('.swiper-container', {
-                autoplay: {
-                    delay: 30000,
-                },
-                speed: 800,
-                loop: false,
-                noSwiping: true,
-                noSwipingClass: 'stop-swiping'
+            this.$nextTick(function () {
+                this.swiper = new Swiper('.on-contents .swiper-container', {
+                    autoplay: {
+                        delay: 30000,
+                    },
+                    speed: 500,
+                    loop: true,
+                    noSwiping: true,
+                    noSwipingClass: 'stop-swiping'
+                });
             });
         },
         init: function () {
@@ -206,11 +222,12 @@ var vm = new Vue({
         },
     },
     mounted: function () {
+        var that = this;
         this.init();
+        setInterval(function () {
+            console.log("1分钟更新数据!");
+            that.init();
+        }, that.minutes);
     },
-    updated: function () {
-        console.log("DOM更新了!")
-        this.swiperInit();
-        this.autoPlayVideo();
-    },
+    updated: function () {},
 });

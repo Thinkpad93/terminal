@@ -2,13 +2,27 @@
 
 html,
 body {
+    margin: 0;
     min-height: 100%;
-    background-color: #fff;
+    background-color: #f2f2f2;
 }
 
+ul,
+ol {
+    list-style-type: none;
+}
+
+ul,
+ol,
 p {
     margin: 0;
     padding: 0;
+}
+
+iframe {
+    border: 0;
+    width: 100%;
+    height: 1590px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -31,7 +45,9 @@ p {
     width: 1080px;
     height: 1590px;
     margin: 0 auto;
-    position: relative
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0px 50px 0 rgba(0, 0, 0, 0.2);
 }
 
 .main .channel {
@@ -60,7 +76,7 @@ p {
     height: 50px;
     width: 100%;
     color: #fff;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .main div.on-scroll {
@@ -87,6 +103,13 @@ p {
     left: 100%;
     z-index: 99;
 }
+
+.scroll li {
+    font-size: 20px;
+    display: inline-block;
+    margin: 12px 30px 0 30px;
+}
+
 
 
 /* 定义第一个的animation：时长 动画名字 匀速 循环 正常播放 */

@@ -10,6 +10,7 @@
     <meta name="x5-page-mode" content="app">
     <meta name="browsermode" content="application">
     <meta name="author" content="门前清风, 206644288@qq.com">
+    <link rel="shortcut icon" href="./favicon.ico">
     <title>屏端控制</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/swiper.min.css">
@@ -20,24 +21,28 @@
     <div id="root">
         <div class="main">
             <!-- 滚动内容 -->
-            <!-- <div class="scroll">
-                <div class="item" v-for="(item, index) in scrollData" :key="index" :start="item.validstarttime" :end="item.validendtime"></div>
-            </div> -->
+            <div class="scroll">
+                <ul>
+                    <li v-for="(item, index) in marquee" :key="index" :start="item.validstarttime" :end="item.validendtime">
+                        {{ item.scroll_content }}
+                    </li>
+                </ul>
+            </div>
             <!-- 栏目 -->
             <div :class="[index === channelIndex ? 'on-channel' : '']" class="channel" :channel="channel.channelname"
                 :priority="channel.priority" :start="channel.validstarttime" :end="channel.validendtime" :playstart="channel.playstarttime"
                 :playend="channel.playendtime" v-for="(channel, index) in channelData" :key="index">
                 <template v-if="index === channelIndex">
-                    <div :class="[cindex === channelContenIndex ? 'on-contents': '']" class="section" v-for="(child, cindex) in channel.contents"
-                        :key="cindex">
+                    <div :title="child.title" :class="[cindex === channelContenIndex ? 'on-contents': '']" class="section"
+                        v-for="(child, cindex) in channel.contents" :key="cindex">
                         <template v-if="cindex === channelContenIndex">
                             <!-- 纯海报 html -->
                             <template v-if="child.showtype === 0">
-
+                                <iframe height="1590" id="poster" ref="iframe" :src="child.url"></iframe>
                             </template>
                             <!-- 纯图片 -->
                             <template v-if="child.showtype === 3">
-                                <div class="swiper-container">
+                                <div :id="'swiper' + cindex" class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images">
                                             <img :src="slide.imageurl" alt="" width="1080" height="1590">
@@ -48,9 +53,9 @@
                             <!-- 上视频下图片 -->
                             <template v-if="child.showtype === 4">
                                 <div class="video">
-                                    <video id="video" ref="videos" :src="child.video.videourl" loop autoplay></video>
+                                    <video id="video" ref="videos" :src="child.video.videourl" loop muted></video>
                                 </div>
-                                <div class="swiper-container">
+                                <div :id="'swiper' + cindex" class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
                                             :key="index">
@@ -61,7 +66,7 @@
                             </template>
                             <!-- 上图片下视频 -->
                             <template v-if="child.showtype === 5">
-                                <div class="swiper-container">
+                                <div :id="'swiper' + cindex" class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
                                             :key="index">
@@ -70,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="video">
-                                    <video id="video" ref="videos" :src="child.video.videourl" loop autoplay></video>
+                                    <video id="video" ref="videos" :src="child.video.videourl" loop muted></video>
                                 </div>
                             </template>
                         </template>
@@ -81,8 +86,17 @@
     </div>
 </body>
 <script src="./js/vue.min.js"></script>
-<script src="./school_panel_content.js"></script>
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
+<script src="./school_panel_content.js"></script>
 <script src="./channel.js"></script>
+<script>
+    $(function () {
+        $(".scroll").marquee({
+            duration: 15000,
+        });
+    });
+</script>
 
 </html>
