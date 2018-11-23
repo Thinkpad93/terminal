@@ -21,9 +21,9 @@
     <div id="root">
         <div class="main">
             <!-- 滚动内容 -->
-            <div class="scroll">
+            <div class="scroll" v-if="marquee.length">
                 <ul>
-                    <li v-for="(item, index) in marquee" :key="index" :start="item.validstarttime" :end="item.validendtime">
+                    <li v-for="(item, index) in marquee" :key="index" :start="item.playTime" :end="item.endTime">
                         {{ item.scroll_content }}
                     </li>
                 </ul>
@@ -90,11 +90,11 @@
 <script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
 <script src="./school_panel_content.js"></script>
-<script src="./channel.js"></script>
+<script src="./index.js"></script>
 <script>
     $(function () {
         $(".scroll").marquee({
-            duration: 15000,
+            duration: 20000,
         });
     });
 </script>
