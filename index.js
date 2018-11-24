@@ -9,6 +9,9 @@ var vm = new Vue({
         timer: null,
         timerScroll: null,
 
+        //学校名称
+        schoolname: "",
+
         //栏目
         channelIndex: -1,
         channelIndexing: -1,
@@ -26,9 +29,9 @@ var vm = new Vue({
 
     },
     watch: {
+        //这里watch当前下在显示的内容索引，从而初始化swiper
         channelContenIndex: function (newVal, oldVal) {
             console.log(newVal, oldVal);
-            //console.log("内容切换了");
             this.swiperInit();
             this.autoPlayVideo();
         }
@@ -65,21 +68,15 @@ var vm = new Vue({
             var isPlayScroll = [];
             for (var s = 0; s < scrollData.length; s++) {
                 var scrolls = scrollData[s];
-                var validstarttime = scrolls.playTime + " 00:00:00"; //滚动开始时间
-                var validendtime = scrolls.endTime + " 23:59:59"; //滚动结束时间
+                var validstarttime = scrolls.playTime + " " + "00:00:00"; //滚动开始时间
+                var validendtime = scrolls.endTime + " " + "23:59:59"; //滚动结束时间
                 //字符串转时间戳
-                var startTime = validstarttime.replace(/-/g, '/');
-                var endTime = validendtime.replace(/-/g, '/');
-                var start = new Date(startTime).getTime();
-                var end = new Date(endTime).getTime();
+                var start = new Date(validstarttime.replace(/-/g, '/')).getTime();
+                var end = new Date(validendtime.replace(/-/g, '/')).getTime();
                 //跟当前时间对比时间戳
                 if (now > start && now <= end) {
                     isPlayScroll.push(scrolls);
-                } else {
-                    console.log(now);
-                    console.log(start);
-                    console.log(end);
-                }
+                } else {}
             }
             //找到滚动内容
             if (isPlayScroll.length) {
@@ -116,19 +113,21 @@ var vm = new Vue({
             }
             //找到栏目
             if (isPlayChannel.length) {
-                var o = this.handleChannelComputed(isPlayChannel)
-                if (Object.keys(o).length) {
-                    this.channelIndex = o.index;
-                    if (this.channelIndexing === this.channelIndex) {
-                        //...
-                    } else {
-                        this.channelIndexing = this.channelIndex;
-                        this.playChannelContens(o.showChannels.contents);
+                //浏览器是否在线
+                if (navigator.onLine) {
+                    var o = this.handleChannelComputed(isPlayChannel);
+                    if (Object.keys(o).length) {
+                        this.channelIndex = o.index;
+                        if (this.channelIndexing === this.channelIndex) {
+                            //...
+                        } else {
+                            this.channelIndexing = this.channelIndex;
+                            this.playChannelContens(o.showChannels.contents);
+                        }
                     }
                 }
-
             } else {
-                //如果没有找到栏目，则不显示
+                //如果没有找到栏目，则不显示，显示缺省的
                 this.channelIndex = -1;
             }
         },
@@ -144,9 +143,12 @@ var vm = new Vue({
             var resultChannel = channels.find(function (elem) {
                 return elem.priority === priorityMax
             });
+            //这里找出栏目名称相同的 播放等级相同的  (还是就是播放开始时间相同的)
             if (Object.keys(resultChannel).length) {
                 index = this.channelData.findIndex(function (elem) {
-                    return elem.channelname === resultChannel.channelname && elem.priority === resultChannel.priority;
+                    return elem.channelname === resultChannel.channelname &&
+                        elem.priority === resultChannel.priority &&
+                        resultChannel.playstarttime === elem.playstarttime;
                 });
                 return {
                     index: index,
@@ -194,6 +196,7 @@ var vm = new Vue({
         },
         //获取数据
         getSchoolData: function () {
+            this.schoolname = channels.schoolname;
             this.channelData = channels.playchannel; //栏目数据
             this.scrollData = channels.scrollContents || []; //滚动数据
             this.getPlayChannels();
@@ -208,6 +211,7 @@ var vm = new Vue({
                 }
             });
         },
+        //初始化swiper
         swiperInit: function () {
             this.$nextTick(function () {
                 this.swiper = new Swiper('.on-contents .swiper-container', {
@@ -221,6 +225,11 @@ var vm = new Vue({
                 });
             });
         },
+        //检查浏览器是否在线
+        handleCheckOnLine() {
+            var line = navigator.onLine;
+            return line ? true : false;
+        },
         init: function () {
             this.getSchoolData();
         },
@@ -229,7 +238,7 @@ var vm = new Vue({
         var that = this;
         this.init();
         setInterval(function () {
-            console.log("1分钟更新数据!");
+            console.log("30秒刷新数据!");
             that.init();
         }, that.minutes);
     },

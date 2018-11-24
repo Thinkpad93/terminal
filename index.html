@@ -19,17 +19,17 @@
 
 <body>
     <div id="root">
-        <div class="main">
+        <div class="main" :data-school="schoolname">
             <!-- 滚动内容 -->
-            <div class="scroll" v-if="marquee.length">
+            <section class="scroll" v-if="marquee.length">
                 <ul>
                     <li v-for="(item, index) in marquee" :key="index" :start="item.playTime" :end="item.endTime">
                         {{ item.scroll_content }}
                     </li>
                 </ul>
-            </div>
+            </section>
             <!-- 栏目 -->
-            <div :class="[index === channelIndex ? 'on-channel' : '']" class="channel" :channel="channel.channelname"
+            <section :class="[index === channelIndex ? 'on-channel' : '']" class="channel" :channel="channel.channelname"
                 :priority="channel.priority" :start="channel.validstarttime" :end="channel.validendtime" :playstart="channel.playstarttime"
                 :playend="channel.playendtime" v-for="(channel, index) in channelData" :key="index">
                 <template v-if="index === channelIndex">
@@ -81,7 +81,7 @@
                         </template>
                     </div>
                 </template>
-            </div>
+            </section>
         </div>
     </div>
 </body>
