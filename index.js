@@ -214,7 +214,7 @@ var vm = new Vue({
         //初始化swiper
         swiperInit: function () {
             this.$nextTick(function () {
-                this.swiper = new Swiper('.on-contents .swiper-container', {
+                this.swiper = new Swiper('.swiper-container', {
                     autoplay: {
                         delay: 30000,
                     },

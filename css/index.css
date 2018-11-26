@@ -54,23 +54,6 @@ iframe {
     box-shadow: 0 0px 50px 0 rgba(0, 0, 0, 0.2);
 }
 
-.main .channel {
-    height: 100%;
-    display: none !important;
-}
-
-.main div.on-channel {
-    display: block !important;
-}
-
-
-.on-channel .section {
-    display: none !important
-}
-
-.on-channel div.on-contents {
-    display: block !important;
-}
 
 .main .scroll {
     position: absolute;

@@ -19,7 +19,7 @@
 
 <body>
     <div id="root">
-        <div class="main" :data-school="schoolname">
+        <div class="main" :school="schoolname">
             <!-- 滚动内容 -->
             <section class="scroll" v-if="marquee.length">
                 <ul>
@@ -29,11 +29,11 @@
                 </ul>
             </section>
             <!-- 栏目 -->
-            <section :class="[index === channelIndex ? 'on-channel' : '']" class="channel" :channel="channel.channelname"
+            <section :style="{display: index === channelIndex ? 'block': 'none'}" class="channel" :channel="channel.channelname"
                 :priority="channel.priority" :start="channel.validstarttime" :end="channel.validendtime" :playstart="channel.playstarttime"
                 :playend="channel.playendtime" v-for="(channel, index) in channelData" :key="index">
                 <template v-if="index === channelIndex">
-                    <div :title="child.title" :class="[cindex === channelContenIndex ? 'on-contents': '']" class="section"
+                    <div :title="child.title" :style="{display: cindex === channelContenIndex ? 'block': 'none'}" class="section"
                         v-for="(child, cindex) in channel.contents" :key="cindex">
                         <template v-if="cindex === channelContenIndex">
                             <!-- 纯海报 html -->
@@ -53,7 +53,7 @@
                             <!-- 上视频下图片 -->
                             <template v-if="child.showtype === 4">
                                 <div class="video">
-                                    <video id="video" ref="videos" :src="child.video.videourl" loop muted></video>
+                                    <video id="video" ref="videos" :src="child.video.videourl" loop></video>
                                 </div>
                                 <div :id="'swiper' + cindex" class="swiper-container">
                                     <div class="swiper-wrapper">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="video">
-                                    <video id="video" ref="videos" :src="child.video.videourl" loop muted></video>
+                                    <video id="video" ref="videos" :src="child.video.videourl" loop></video>
                                 </div>
                             </template>
                         </template>
