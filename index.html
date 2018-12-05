@@ -1,102 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- 360默认用极速核 -->
-    <meta name="renderer" content="webkit">
-    <meta name="x5-page-mode" content="app">
-    <meta name="browsermode" content="application">
-    <meta name="author" content="门前清风, 206644288@qq.com">
-    <link rel="shortcut icon" href="./favicon.ico">
+    <meta name="renderer" content="webkit" />
+    <meta name="x5-page-mode" content="app" />
+    <meta name="browsermode" content="application" />
+    <meta name="author" content="门前清风, 206644288@qq.com" />
+    <link rel="shortcut icon" href="./favicon.ico" />
     <title>屏端控制</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/swiper.min.css">
-    <link rel="stylesheet" href="css/index.css">
-</head>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/swiper.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
 
-<body>
+  <body>
     <div id="root">
-        <div class="main" :school="schoolname">
-            <!-- 滚动内容 -->
-            <section class="scroll" v-if="marquee.length">
-                <ul>
-                    <li v-for="(item, index) in marquee" :key="index" :start="item.playTime" :end="item.endTime">
-                        {{ item.scroll_content }}
-                    </li>
-                </ul>
-            </section>
-            <!-- 栏目 -->
-            <section :style="{display: index === channelIndex ? 'block': 'none'}" class="channel" :channel="channel.channelname"
-                :priority="channel.priority" :start="channel.validstarttime" :end="channel.validendtime" :playstart="channel.playstarttime"
-                :playend="channel.playendtime" v-for="(channel, index) in channelData" :key="index">
-                <template v-if="index === channelIndex">
-                    <div :title="child.title" :style="{display: cindex === channelContenIndex ? 'block': 'none'}" class="section"
-                        v-for="(child, cindex) in channel.contents" :key="cindex">
-                        <template v-if="cindex === channelContenIndex">
-                            <!-- 纯海报 html -->
-                            <template v-if="child.showtype === 0">
-                                <iframe height="1590" id="poster" ref="iframe" :src="child.url"></iframe>
-                            </template>
-                            <!-- 纯图片 -->
-                            <template v-if="child.showtype === 3">
-                                <div :id="'swiper' + cindex" class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images">
-                                            <img :src="slide.imageurl" alt="" width="1080" height="1590">
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                            <!-- 上视频下图片 -->
-                            <template v-if="child.showtype === 4">
-                                <div class="video">
-                                    <video id="video" ref="videos" :src="child.video.videourl" loop></video>
-                                </div>
-                                <div :id="'swiper' + cindex" class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
-                                            :key="index">
-                                            <img :src="slide.imageurl" alt="" width="1080" height="880">
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                            <!-- 上图片下视频 -->
-                            <template v-if="child.showtype === 5">
-                                <div :id="'swiper' + cindex" class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images"
-                                            :key="index">
-                                            <img :src="slide.imageurl" alt="" width="1080" height="880">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="video">
-                                    <video id="video" ref="videos" :src="child.video.videourl" loop></video>
-                                </div>
-                            </template>
-                        </template>
-                    </div>
+      <div class="main" :school="schoolname">
+        <!-- 播放缺省的内容 -->
+        <template v-if="local">
+          <div class="local" style="width:1080px;height: 1590px;">
+            <div id="localImg" class="swiper-container">
+              <div class="swiper-wrapper">
+                <div
+                  class="swiper-slide stop-swiping"
+                  v-for="(d, index) in localImgList"
+                >
+                  <img :src="d.imageurl" alt="" width="1080" height="1590" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <!-- 滚动内容 -->
+        <section class="scroll" v-if="marquee.length">
+          <ul>
+            <li
+              v-for="(item, index) in marquee"
+              :key="index"
+              :start="item.playTime"
+              :end="item.endTime"
+            >
+              {{ item.scroll_content }}
+            </li>
+          </ul>
+        </section>
+        <!-- 栏目 -->
+        <section
+          :style="{display: index === channelIndex ? 'block': 'none'}"
+          class="channel"
+          :channel="channel.channelname"
+          :priority="channel.priority"
+          :start="channel.validstarttime"
+          :end="channel.validendtime"
+          :playstart="channel.playstarttime"
+          :playend="channel.playendtime"
+          v-for="(channel, index) in channelData"
+          :key="index"
+        >
+          <template v-if="index === channelIndex">
+            <div
+              :title="child.title"
+              :style="{display: cindex === channelContenIndex ? 'block': 'none'}"
+              class="section"
+              v-for="(child, cindex) in channel.contents"
+              :key="cindex"
+            >
+              <template v-if="cindex === channelContenIndex">
+                <!-- 纯海报 html -->
+                <template v-if="child.showtype === 0">
+                  <iframe
+                    height="1590"
+                    id="poster"
+                    ref="iframe"
+                    :src="child.url"
+                  ></iframe>
                 </template>
-            </section>
-        </div>
+                <!-- 纯图片 -->
+                <template v-if="child.showtype === 3">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div
+                        class="swiper-slide stop-swiping"
+                        v-for="(slide, index) in child.images"
+                      >
+                        <img
+                          :src="slide.imageurl"
+                          alt=""
+                          width="1080"
+                          height="1590"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <!-- 上视频下图片 -->
+                <template v-if="child.showtype === 4">
+                  <div class="video">
+                    <video
+                      id="video"
+                      ref="videos"
+                      :src="child.video.videourl"
+                      loop
+                    ></video>
+                  </div>
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div
+                        class="swiper-slide stop-swiping"
+                        v-for="(slide, index) in child.images"
+                        :key="index"
+                      >
+                        <img
+                          :src="slide.imageurl"
+                          alt=""
+                          width="1080"
+                          height="1060"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <!-- 上图片下视频 -->
+                <template v-if="child.showtype === 5">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div
+                        class="swiper-slide stop-swiping"
+                        v-for="(slide, index) in child.images"
+                        :key="index"
+                      >
+                        <img
+                          :src="slide.imageurl"
+                          alt=""
+                          width="1080"
+                          height="1060"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="video">
+                    <video
+                      id="video"
+                      ref="videos"
+                      :src="child.video.videourl"
+                      loop
+                    ></video>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </template>
+        </section>
+      </div>
     </div>
-</body>
-<script src="./js/vue.min.js"></script>
-<script src="./js/jquery-1.12.4.min.js"></script>
-<script src="./js/jquery.marquee.min.js"></script>
-<script src="./js/swiper.min.js"></script>
-<script src="./school_panel_content.js"></script>
-<script src="./index.js"></script>
-<script>
-    $(function () {
-        $(".scroll").marquee({
-            duration: 20000,
-        });
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script src="./js/jquery-1.12.4.min.js"></script>
+  <script src="./js/jquery.marquee.min.js"></script>
+  <script src="./js/swiper.min.js"></script>
+  <script src="./school_panel_content.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    $(function() {
+      $(".scroll").marquee({
+        duration: 20000
+      });
     });
-</script>
-
+  </script>
 </html>

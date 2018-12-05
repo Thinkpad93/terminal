@@ -25,7 +25,50 @@ var vm = new Vue({
         marquee: [],
 
         //栏目数据
-        channelData: []
+        channelData: [],
+
+        //缺省的内容
+        local: false,
+        localImgList: [{
+                imageurl: "./localImg/slide1.jpg"
+            },
+            {
+                imageurl: "./localImg/slide2.jpg"
+            },
+            {
+                imageurl: "./localImg/slide3.jpg"
+            },
+            {
+                imageurl: "./localImg/slide4.jpg"
+            },
+            {
+                imageurl: "./localImg/slide5.jpg"
+            },
+            {
+                imageurl: "./localImg/slide6.jpg"
+            },
+            {
+                imageurl: "./localImg/slide7.jpg"
+            },
+            {
+                imageurl: "./localImg/slide8.jpg"
+            },
+            {
+                imageurl: "./localImg/slide9.jpg"
+            },
+            {
+                imageurl: "./localImg/slide10.jpg"
+            },
+            {
+                imageurl: "./localImg/slide11.jpg"
+            },
+            {
+                imageurl: "./localImg/slide12.jpg"
+            },
+            {
+                imageurl: "./localImg/slide13.jpg"
+            },
+        ]
 
     },
     watch: {
@@ -34,7 +77,11 @@ var vm = new Vue({
             console.log(newVal, oldVal);
             this.swiperInit();
             this.autoPlayVideo();
-        }
+        },
+        local: function (newVal, oldVal) {
+            console.log(newVal, oldVal);
+            this.swiperLocalInit();
+        },
     },
     methods: {
         //添加补0操作
@@ -116,19 +163,26 @@ var vm = new Vue({
                 //浏览器是否在线
                 if (navigator.onLine) {
                     var o = this.handleChannelComputed(isPlayChannel);
-                    if (Object.keys(o).length) {
-                        this.channelIndex = o.index;
-                        if (this.channelIndexing === this.channelIndex) {
-                            //...
-                        } else {
-                            this.channelIndexing = this.channelIndex;
-                            this.playChannelContens(o.showChannels.contents);
+                    //如果找到的栏目里面没有内容
+                    if (!o.showChannels.contents.length) {
+                        this.local = true;
+                    } else {
+                        this.local = false;
+                        if (Object.keys(o).length) {
+                            this.channelIndex = o.index;
+                            if (this.channelIndexing === this.channelIndex) {
+                                //...
+                            } else {
+                                this.channelIndexing = this.channelIndex;
+                                this.playChannelContens(o.showChannels.contents);
+                            }
                         }
                     }
                 }
             } else {
                 //如果没有找到栏目，则不显示，显示缺省的
-                this.channelIndex = -1;
+                console.log("没有找到栏目");
+                this.local = true;
             }
         },
         //处理栏目并返回需要显示的栏目
@@ -211,10 +265,24 @@ var vm = new Vue({
                 }
             });
         },
+        //初始化本地swiper
+        swiperLocalInit() {
+            this.$nextTick(function () {
+                new Swiper('#localImg', {
+                    autoplay: {
+                        delay: 30000,
+                    },
+                    speed: 1000,
+                    loop: true,
+                    noSwiping: true,
+                    noSwipingClass: 'stop-swiping'
+                });
+            });
+        },
         //初始化swiper
         swiperInit: function () {
             this.$nextTick(function () {
-                this.swiper = new Swiper('.swiper-container', {
+                this.swiper = new Swiper('.channel .swiper-container', {
                     autoplay: {
                         delay: 30000,
                     },

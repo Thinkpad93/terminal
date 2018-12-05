@@ -7,11 +7,21 @@ var channels = {
         },
         {
             "playTime": "2018-11-19",
-            "endTime": "2018-11-30",
+            "endTime": "2018-12-30",
             "scroll_content": "后来李广畏罪自杀，孝宗以为李广家中有天书，命人搜寻，却搜出了李广贪污、受贿的账本，孝宗这才醒悟。"
         }
     ],
     "playchannel": [{
+            "validstarttime": "2018-12-05",
+            "validendtime": "2019-12-05",
+            "validtype": 0,
+            "scrolltype": 0,
+            "contents": [],
+            "channelname": "学校门户",
+            "priority": 5,
+            "playendtime": "23:30:01",
+            "playstarttime": "08:20:00"
+        }, {
             "playstarttime": "09:00:00",
             "playendtime": "10:00:00",
             "channelname": "广东凉茶",
@@ -19,7 +29,7 @@ var channels = {
             "priority": 1,
             "validtype": 1,
             "validstarttime": "2018-11-20",
-            "validendtime": "2020-12-20",
+            "validendtime": "2018-11-30",
             "scrollContents": [],
             "contents": [{
                     "title": "禅与摩托车维修艺术",
@@ -99,7 +109,7 @@ var channels = {
             "priority": 1,
             "validtype": 1,
             "validstarttime": "2018-11-20",
-            "validendtime": "2018-12-20",
+            "validendtime": "2018-11-30",
             "scrollContents": [],
             "contents": [{
                     "title": "天行健",
@@ -170,7 +180,7 @@ var channels = {
             "priority": 1,
             "validtype": 1,
             "validstarttime": "2018-10-26",
-            "validendtime": "2018-12-12",
+            "validendtime": "2018-11-30",
             "scrollContents": [],
             "contents": [{
                     "title": "西游记",
@@ -233,7 +243,7 @@ var channels = {
             "priority": 5,
             "validtype": 1,
             "validstarttime": "2018-10-26",
-            "validendtime": "2018-12-05",
+            "validendtime": "2018-11-30",
             "scrollContents": [],
             "contents": [{
                     "title": "推荐答案",
@@ -265,7 +275,7 @@ var channels = {
                 },
                 {
                     "title": "教育工作者",
-                    "duration": "100",
+                    "duration": "500",
                     "showtype": 0,
                     "url": "/html/20181119/index.html"
                 },
