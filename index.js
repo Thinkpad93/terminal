@@ -76,7 +76,7 @@ var vm = new Vue({
         channelContenIndex: function (newVal, oldVal) {
             console.log(newVal, oldVal);
             this.swiperInit();
-            this.autoPlayVideo();
+            //this.autoPlayVideo();
         },
         local: function (newVal, oldVal) {
             console.log(newVal, oldVal);
@@ -253,17 +253,22 @@ var vm = new Vue({
             this.schoolname = channels.schoolname;
             this.channelData = channels.playchannel; //栏目数据
             this.scrollData = channels.scrollContents || []; //滚动数据
+            top.schoolId = channels.schoolId; //在顶级window对象中保存学校ID 
             this.getPlayChannels();
             this.getScrollContens();
         },
         //自动播放视频
         autoPlayVideo: function () {
-            this.$nextTick(function () {
-                var video = document.getElementById('video');
-                if (video) {
-                    video.play();
-                }
-            });
+            var video = document.getElementById('video');
+            if (video) {
+                video.play();
+            }
+            // this.$nextTick(function () {
+            //     var video = document.getElementById('video');
+            //     if (video) {
+            //         video.play();
+            //     }
+            // });
         },
         //初始化本地swiper
         swiperLocalInit() {
@@ -292,6 +297,7 @@ var vm = new Vue({
                     noSwipingClass: 'stop-swiping'
                 });
             });
+            //this.autoPlayVideo();
         },
         //检查浏览器是否在线
         handleCheckOnLine() {

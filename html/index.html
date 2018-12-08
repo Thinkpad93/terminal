@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日文图片翻译的相关搜索</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <main id="main" class="main">
+        <div id="portal" class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide stop-swiping" v-for="(slide, index) in portalList" :key="index" :title="slide.menuName">
+                    <div class="portal" v-html="slide.text"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="../js/vue.min.js"></script>
+<script src="../js/swiper.min.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="./index.js"></script>
+
+</html>

@@ -1,4 +1,5 @@
 var channels = {
+    "schoolId": 125,
     "schoolname": "幼儿园",
     "scrollContents": [{
             "playTime": "2018-11-19",
@@ -18,7 +19,7 @@ var channels = {
             "scrolltype": 0,
             "contents": [],
             "channelname": "学校门户",
-            "priority": 5,
+            "priority": 1,
             "playendtime": "23:30:01",
             "playstarttime": "08:20:00"
         }, {
@@ -173,14 +174,14 @@ var channels = {
             ]
         },
         {
-            "playstarttime": "11:01:00",
-            "playendtime": "12:00:00",
+            "playstarttime": "08:01:00",
+            "playendtime": "22:00:00",
             "channelname": "明清小说",
             "scrolltype": 0,
             "priority": 1,
             "validtype": 1,
-            "validstarttime": "2018-10-26",
-            "validendtime": "2018-11-30",
+            "validstarttime": "2018-11-26",
+            "validendtime": "2018-12-30",
             "scrollContents": [],
             "contents": [{
                     "title": "西游记",
@@ -236,14 +237,14 @@ var channels = {
             ]
         },
         {
-            "playstarttime": "12:01:00",
+            "playstarttime": "12:00:00",
             "playendtime": "23:00:00",
             "channelname": "白话小说",
             "scrolltype": 0,
             "priority": 5,
             "validtype": 1,
             "validstarttime": "2018-10-26",
-            "validendtime": "2018-11-30",
+            "validendtime": "2018-12-30",
             "scrollContents": [],
             "contents": [{
                     "title": "推荐答案",
@@ -276,8 +277,8 @@ var channels = {
                 {
                     "title": "教育工作者",
                     "duration": "500",
-                    "showtype": 0,
-                    "url": "/html/20181119/index.html"
+                    "showtype": 6,
+                    "url": "/html/index.html"
                 },
                 {
                     "title": "章太炎",
