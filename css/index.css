@@ -6,6 +6,11 @@ body {
     margin: 0;
     min-height: 100%;
     font-size: 16px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     font-family: "PingFangSC-Regular", "Microsoft YaHei", Helvetica;
     background-color: #f2f2f2;
 }
@@ -69,9 +74,9 @@ iframe {
 .scroll li {
     letter-spacing: 0.5px;
     font-weight: bolder;
-    font-size: 26px;
+    font-size: 34px;
     display: inline-block;
-    margin: 30px 70px 0 30px;
+    margin: 26px 200px 0 30px;
 }
 
 .video {

@@ -166,6 +166,8 @@ var vm = new Vue({
                     //如果找到的栏目里面没有内容
                     if (!o.showChannels.contents.length) {
                         this.local = true;
+                        //设置栏目不显示
+                        this.channelIndex = -1;
                     } else {
                         this.local = false;
                         if (Object.keys(o).length) {
@@ -259,10 +261,10 @@ var vm = new Vue({
         },
         //自动播放视频
         autoPlayVideo: function () {
-            var video = document.getElementById('video');
-            if (video) {
-                video.play();
-            }
+            // var video = document.getElementById('video');
+            // if (video) {
+            //     video.play();
+            // }
             // this.$nextTick(function () {
             //     var video = document.getElementById('video');
             //     if (video) {

@@ -29,7 +29,11 @@
 <script src="./js/jquery.marquee.min.js"></script>
 <script>
     $(function () {
-        $(".marquee").marquee();
+        $(".marquee").marquee({
+            pauseOnHover: true,
+            pauseOnCycle: false,
+            duplicated: true
+        });
     });
 </script>
 
