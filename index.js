@@ -123,7 +123,9 @@ var vm = new Vue({
                 //跟当前时间对比时间戳
                 if (now > start && now <= end) {
                     isPlayScroll.push(scrolls);
-                } else {}
+                } else {
+
+                }
             }
             //找到滚动内容
             if (isPlayScroll.length) {

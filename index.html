@@ -15,13 +15,6 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/swiper.min.css">
   <link rel="stylesheet" href="css/index.css">
-  <style>
-    .scroll li {
-      white-space: nowrap;
-      width: auto !important;
-    }
-  </style>
-
 </head>
 
 <body>
@@ -42,14 +35,11 @@
       <!-- 滚动内容 -->
       <template v-if="marquee.length">
         <section class="scroll">
-          <div class="hd"></div>
-          <div class="bd">
-            <ul class="infoList">
-              <li v-for="(item, index) in marquee" :key="index" :start="item.playTime" :end="item.endTime">
-                {{ item.scroll_content }}
-              </li>
-            </ul>
-          </div>
+          <ul class="infoList">
+            <li v-for="(item, index) in marquee" :key="index" :start="item.playTime" :end="item.endTime">
+              {{ item.scroll_content }}
+            </li>
+          </ul>
         </section>
       </template>
       <!-- 栏目 -->
@@ -109,28 +99,18 @@
 </body>
 <script src="./js/vue.min.js"></script>
 <script src="./js/jquery-1.12.4.min.js"></script>
-<!-- <script src="./js/jquery.marquee.min.js"></script> -->
-<script src="./js/jquery.SuperSlide.2.1.3.js"></script>
+<script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
-<script src="./school_panel_content-3.js"></script>
+<script src="./school_panel_content.js"></script>
 <script src="./index.js"></script>
 <script>
   $(function () {
-
-    $(".scroll").slide({
-      mainCell: ".bd ul",
-      autoPlay: true,
-      effect: "leftMarquee",
-      interTime: 40,
-      trigger: "click"
-    });
-    // var scroll = $(".scroll");
-    // if (scroll) {
-    //   $(".scroll").marquee({
-    //     duration: 20000,
-    //     pauseOnHover: false
-    //   });
-    // }
+    setTimeout(function () {
+      $(".scroll").marquee({
+        duration: 20000,
+        pauseOnHover: false
+      });
+    }, 50);
   });
 </script>
 
