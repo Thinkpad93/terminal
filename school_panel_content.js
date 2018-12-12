@@ -179,18 +179,18 @@ var channels = {
             ]
         },
         {
-            "playstarttime": "08:01:00",
+            "playstarttime": "08:00:00",
             "playendtime": "22:00:00",
             "channelname": "明清小说",
             "scrolltype": 0,
-            "priority": 1,
+            "priority": 5,
             "validtype": 1,
-            "validstarttime": "2018-11-26",
-            "validendtime": "2018-11-30",
+            "validstarttime": "2018-12-12",
+            "validendtime": "2018-12-30",
             "scrollContents": [],
             "contents": [{
                     "title": "西游记",
-                    "duration": "100",
+                    "duration": "90",
                     "showtype": 3,
                     "images": [{
                             "imageurl": "/image/201811081610.jpg",
@@ -216,6 +216,36 @@ var channels = {
                                 "filename": "201811081612.jpg"
                             }
                         },
+                    ]
+                },
+                {
+                    "title": "长鹰",
+                    "duration": "90",
+                    "showtype": 3,
+                    "images": [{
+                            "imageurl": "/image/201810260939.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081610.jpg"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201810260940.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081610.jpg"
+                            }
+                        },
+                        {
+                            "imageurl": "/image/201810260941.jpg",
+                            "update_info": {
+                                "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
+                                "size": 41184440,
+                                "filename": "201811081610.jpg"
+                            }
+                        }
                     ]
                 },
                 {

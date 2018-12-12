@@ -52,7 +52,7 @@
             <template v-if="cindex === channelContenIndex">
               <!-- 门户网站 html -->
               <template v-if="child.showtype === 6">
-                <iframe height="1590" id="poster" ref="iframe" :src="child.url"></iframe>
+                <iframe height="1590" id="poster" ref="iframe" :src="child.webUrl"></iframe>
               </template>
               <!-- 纯图片 -->
               <template v-if="child.showtype === 3">
