@@ -52,7 +52,9 @@
             <template v-if="cindex === channelContenIndex">
               <!-- 门户网站 html -->
               <template v-if="child.showtype === 6">
-                <iframe height="1590" id="poster" ref="iframe" :src="child.webUrl"></iframe>
+                <img :src="protalUrl + 'image/empty.jpg'" style="display:none" @error="handleError" />
+                <img v-if="!frameVisible" src="./localImg/slide1.jpg" alt="" />
+                <iframe v-if="frameVisible" height="1590" id="poster" ref="iframe" :src="child.webUrl"></iframe>
               </template>
               <!-- 纯图片 -->
               <template v-if="child.showtype === 3">
@@ -72,7 +74,7 @@
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                      <img :src="slide.imageurl" alt="" width="1080" height="1060" />
+                      <img :src="slide.imageurl" alt="" width="1080" height="982" />
                     </div>
                   </div>
                 </div>
@@ -82,7 +84,7 @@
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                      <img :src="slide.imageurl" alt="" width="1080" height="1060" />
+                      <img :src="slide.imageurl" alt="" width="1080" height="982" />
                     </div>
                   </div>
                 </div>

@@ -108,25 +108,25 @@ var channels = {
             ]
         },
         {
-            "playstarttime": "10:01:00",
-            "playendtime": "11:00:00",
+            "playstarttime": "14:00:00",
+            "playendtime": "16:00:00",
             "channelname": "国故论衡",
             "scrolltype": 0,
-            "priority": 1,
+            "priority": 5,
             "validtype": 1,
-            "validstarttime": "2018-11-20",
-            "validendtime": "2018-11-30",
+            "validstarttime": "2018-12-18",
+            "validendtime": "2018-12-30",
             "scrollContents": [],
             "contents": [{
                     "title": "天行健",
-                    "duration": "60",
-                    "showtype": 4,
+                    "duration": "260",
+                    "showtype": 5,
                     "video": {
-                        "videourl": "/video/5f817b1b4cf99aa65a49d26cade17949.mp4",
+                        "videourl": "/video/33ede7bfc793e7a634e8c1c902c7f69e.mp4",
                         "update_info": {
                             "md5": "ef23e1cd6a0278f80c3ecf664ab8f3bd",
                             "size": 41184440,
-                            "filename": "5f817b1b4cf99aa65a49d26cade17949.mp4"
+                            "filename": "33ede7bfc793e7a634e8c1c902c7f69e.mp4"
                         }
                     },
                     "images": [{
@@ -183,10 +183,10 @@ var channels = {
             "playendtime": "22:00:00",
             "channelname": "明清小说",
             "scrolltype": 0,
-            "priority": 5,
+            "priority": 4,
             "validtype": 1,
             "validstarttime": "2018-12-12",
-            "validendtime": "2018-12-30",
+            "validendtime": "2018-12-13",
             "scrollContents": [],
             "contents": [{
                     "title": "西游记",
@@ -278,8 +278,8 @@ var channels = {
             "scrolltype": 0,
             "priority": 5,
             "validtype": 1,
-            "validstarttime": "2018-10-26",
-            "validendtime": "2018-11-30",
+            "validstarttime": "2018-12-05",
+            "validendtime": "2018-12-30",
             "scrollContents": [],
             "contents": [{
                     "title": "推荐答案",
@@ -310,10 +310,18 @@ var channels = {
                     }]
                 },
                 {
-                    "title": "教育工作者",
-                    "duration": "500",
+                    "images": [],
+                    "duration": "90",
                     "showtype": 6,
-                    "url": "/html/index.html"
+                    "webUrl": "http://192.168.18.113:8080/qxiao-cms/portal/index.html?schoolId=81",
+                    "video": {
+                        "videourl": "",
+                        "update_info": {
+                            "filename": "{}",
+                            "size": 0,
+                            "md5": "md5"
+                        }
+                    }
                 },
                 {
                     "title": "章太炎",

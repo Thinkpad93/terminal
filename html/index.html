@@ -13,6 +13,9 @@
 
 <body>
     <main id="main" class="main">
+        <div class="tip" v-if="view">
+            <img src="./image/empty.png" alt="" width="1080" height="1590">
+        </div>
         <div id="portal" class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide stop-swiping" v-for="(slide, index) in portalList" :key="index" :title="slide.menuName">

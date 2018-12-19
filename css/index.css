@@ -110,14 +110,14 @@ iframe {
 .video {
     overflow: hidden;
     position: relative;
-    background-color: #fff;
+    background-color: #000;
 }
 
 video {
     width: 1080px;
-    height: 530px;
+    height: 608px;
     display: block;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 img {

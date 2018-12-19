@@ -2,6 +2,7 @@ var vm = new Vue({
     el: "#main",
     data: {
         url: "http://192.168.18.113:8080/qxiao-cms/action/mod-xiaojiao/portal/queryProtalWebAllInfo.do",
+        view: false,
         swiper: null,
         portalList: []
     },
@@ -17,12 +18,21 @@ var vm = new Vue({
                 schoolId: schoolId
             }).then(function (res) {
                 if (res.data.errorCode === 0) {
-                    that.portalList = res.data.data;
+                    if (!res.data.data.length) {
+                        that.view = true;
+                    } else {
+                        that.view = false;
+                        that.portalList = res.data.data;
+                    }
                 } else {
+                    //处理没有审核通过的
+                    that.view = true;
                     that.portalList = [];
                 }
             }).catch(function (error) {
-
+                //当网络出现问题时
+                that.view = true;
+                that.portalList = [];
             });
         },
         //初始化swiper
@@ -40,13 +50,13 @@ var vm = new Vue({
             });
         },
         init: function () {
-            this.getPortalWebInfo(top.schoolId);
-            //
+            var href = window.location.href;
+            var schoolId = href.substring(href.lastIndexOf('=') + 1);
+            this.getPortalWebInfo(schoolId);
         }
     },
     mounted: function () {
         this.init();
-        console.log("门户数据");
     }
 });
 console.log(vm);
