@@ -112,7 +112,7 @@ var channels = {
             "playendtime": "16:00:00",
             "channelname": "国故论衡",
             "scrolltype": 0,
-            "priority": 5,
+            "priority": 1,
             "validtype": 1,
             "validstarttime": "2018-12-18",
             "validendtime": "2018-12-30",
@@ -310,8 +310,9 @@ var channels = {
                     }]
                 },
                 {
+                    "title": "门户网站",
                     "images": [],
-                    "duration": "90",
+                    "duration": "200",
                     "showtype": 6,
                     "webUrl": "http://192.168.18.113:8080/qxiao-cms/portal/index.html?schoolId=81",
                     "video": {

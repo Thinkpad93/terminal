@@ -307,6 +307,7 @@ var vm = new Vue({
         },
         //当网络访问不到时，图片加载出错事件
         handleError() {
+            console.log(this.protalUrl);
             this.frameVisible = false;
         },
     },
