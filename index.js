@@ -1,6 +1,10 @@
 var vm = new Vue({
     el: "#root",
     data: {
+        punchUrl: "http://23s662016z.imwork.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do",
+        punchName: "",
+        punchPhoto: "",
+        punchTime: "",
         protalUrl: "",
         frameVisible: true,
         swiper: null,
@@ -32,43 +36,43 @@ var vm = new Vue({
         //缺省的内容
         local: false,
         localImgList: [{
-                imageurl: "./localImg/slide1.jpg"
+                imageurl: "./local/slide1.jpg"
             },
             {
-                imageurl: "./localImg/slide2.jpg"
+                imageurl: "./local/slide2.jpg"
             },
             {
-                imageurl: "./localImg/slide3.jpg"
+                imageurl: "./local/slide3.jpg"
             },
             {
-                imageurl: "./localImg/slide4.jpg"
+                imageurl: "./local/slide4.jpg"
             },
             {
-                imageurl: "./localImg/slide5.jpg"
+                imageurl: "./local/slide5.jpg"
             },
             {
-                imageurl: "./localImg/slide6.jpg"
+                imageurl: "./local/slide6.jpg"
             },
             {
-                imageurl: "./localImg/slide7.jpg"
+                imageurl: "./local/slide7.jpg"
             },
             {
-                imageurl: "./localImg/slide8.jpg"
+                imageurl: "./local/slide8.jpg"
             },
             {
-                imageurl: "./localImg/slide9.jpg"
+                imageurl: "./local/slide9.jpg"
             },
             {
-                imageurl: "./localImg/slide10.jpg"
+                imageurl: "./local/slide10.jpg"
             },
             {
-                imageurl: "./localImg/slide11.jpg"
+                imageurl: "./local/slide11.jpg"
             },
             {
-                imageurl: "./localImg/slide12.jpg"
+                imageurl: "./local/slide12.jpg"
             },
             {
-                imageurl: "./localImg/slide13.jpg"
+                imageurl: "./local/slide13.jpg"
             },
         ]
 
@@ -76,11 +80,9 @@ var vm = new Vue({
     watch: {
         //这里watch当前在显示的内容索引，从而初始化swiper
         channelContenIndex: function (newVal, oldVal) {
-            console.log(newVal, oldVal);
             this.swiperInit();
         },
         local: function (newVal, oldVal) {
-            console.log(newVal, oldVal);
             this.swiperLocalInit();
         },
     },
@@ -250,6 +252,42 @@ var vm = new Vue({
                 }
             }
         },
+        //提供给APP调用接口
+        ikepu_js(json_str) {
+            var req = JSON.parse(json_str);
+            var that = this;
+            //打卡类别 0-NFC打卡 1-ibeacon打卡
+            if (req.action === 'nfc_login') {
+                let params = {
+                    type: 0,
+                    nfcId: req.data.nfcid,
+                    ibeaconId: ""
+                };
+                axios.post(that.punchUrl, params).then(function (res) {
+                    var data = res.data;
+                    if (data.errorCode == 0) {
+                        that.punchName = data.data.studentName; //名称
+                        that.punchPhoto = data.data.photo; //头像
+                        that.punchTime = data.data.time; //打卡时间
+                        //layer
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            shade: 0,
+                            closeBtn: 0,
+                            time: 4000, //多少秒关闭
+                            skin: 'punchClock-layer',
+                            maxWidth: 710,
+                            content: $(".punchClock")
+                        });
+                    } else {
+                        alert("信息读取有误请再次打卡");
+                    }
+                }).catch(function (error) {
+                    alert(error);
+                });
+            }
+        },
         //获取数据
         getSchoolData: function () {
             this.schoolname = channels.schoolname; //学校名称
@@ -307,7 +345,6 @@ var vm = new Vue({
         },
         //当网络访问不到时，图片加载出错事件
         handleError() {
-            console.log(this.protalUrl);
             this.frameVisible = false;
         },
     },

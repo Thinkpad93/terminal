@@ -27,6 +27,16 @@
 
 <body>
   <div id="root">
+    <!-- 显示打卡成功 -->
+    <div class="punchClock">
+      <div class="clock">
+        <div class="figure">
+          <img id="photo" :src="punchPhoto">
+          <p>你好,<strong id="uName">{{ punchName }}</strong>小朋友</p>
+          <div class="time" id="time">{{ punchTime }}</div>
+        </div>
+      </div>
+    </div>
     <div class="main" :school="schoolname">
       <!-- 播放缺省的内容 -->
       <template v-if="local">
@@ -112,12 +122,16 @@
   </div>
 </body>
 <script src="./js/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 <script src="./js/jquery-1.12.4.min.js"></script>
 <script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
+<script src="./layer.js"></script>
 <script src="./school_panel_content.js"></script>
 <script src="./index.js"></script>
 <script>
+  window.ikepu_js = vm.ikepu_js;
+  //ikepu_js('{"data":{"nfcid":"1"},"action":"nfc_login"}');
   $(function () {
     setTimeout(function () {
       $(".scroll").marquee({

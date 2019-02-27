@@ -124,3 +124,64 @@ img {
     vertical-align: top;
     max-width: 100%;
 }
+
+/** 打卡 **/
+.punchClock {
+    display: none;
+}
+
+.punchClock .clock {
+    width: 640px;
+    height: 552px;
+    background-image: url("../punch-clock-success.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.punchClock .figure {
+    padding-top: 72px;
+    text-align: center;
+}
+
+.punchClock img {
+    width: 180px;
+    height: 180px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    vertical-align: top;
+}
+
+.punchClock p {
+    padding-top: 24px;
+    font-size: 30px;
+    color: #006170;
+    font-weight: bold;
+    text-align: center;
+}
+
+.punchClock p strong {
+    display: inline-block;
+    font-size: 40px;
+    color: #ff1a55;
+    margin: 0 20px;
+    -webkit-text-stroke: 2px #fff;
+}
+
+.punchClock .time {
+    font-size: 18px;
+    color: #ff1a55;
+    -webkit-text-stroke: 1px #fff;
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    z-index: 1;
+    font-weight: bold;
+    transform: translateX(-50%);
+}
+
+.punchClock-layer {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
