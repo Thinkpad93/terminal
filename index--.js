@@ -254,21 +254,36 @@ var vm = new Vue({
         },
         //提供给APP调用接口
         ikepu_js(json_str) {
+            alert("2019");
             var req = JSON.parse(json_str);
             var that = this;
             //打卡类别 0-NFC打卡 1-ibeacon打卡
             if (req.action === 'nfc_login') {
+                alert("201902");
+                var params = {
+                    type: 0,
+                    nfcId: req.data.nfcid,
+                    ibeaconId: ""
+                };
+                let n = 520;
+                alert(n);
+                alert(that.punchUrl);
+                alert(JSON.stringify(params));
                 $.ajax({
-                    type: 'GET',
-                    dataType: "jsonp",
-                    jsonp: "jsoncallback",
-                    jsonpCallback: "success_jsonpCallback",
-                    url: "http://23s662016z.imwork.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" + req.data.nfcid,
+                    method: 'POST',
+                    dataType: "json",
+                    url: that.punchUrl,
+                    data: JSON.stringify(params), // 要发送的数据
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    },
                     success: function (res) {
-                        if (res.studentName) {
-                            that.punchName = res.studentName; //名称
-                            that.punchPhoto = res.photo; //头像
-                            that.punchTime = res.time; //打卡时间
+                        if (res.errorCode == 0) {
+                            alert("20190227");
+                            that.punchName = res.data.studentName; //名称
+                            that.punchPhoto = res.data.photo; //头像
+                            that.punchTime = res.data.time; //打卡时间
+                            //layer
                             layer.open({
                                 type: 1,
                                 title: false,
@@ -280,10 +295,40 @@ var vm = new Vue({
                                 content: $(".punchClock")
                             });
                         }
-
                     },
-                    error: function (res) {}
+                    error: function (error) {
+                        alert(JSON.stringify(params));
+                        alert("error10086");
+                        alert(error);
+                    }
                 });
+                // axios.post(that.punchUrl, params).then(function (res) {
+                //     var data = res.data;
+                //     if (data.errorCode == 0) {
+                //         alert("20190227");
+                //         that.punchName = data.data.studentName; //名称
+                //         that.punchPhoto = data.data.photo; //头像
+                //         that.punchTime = data.data.time; //打卡时间
+                //         //layer
+                //         layer.open({
+                //             type: 1,
+                //             title: false,
+                //             shade: 0,
+                //             closeBtn: 0,
+                //             time: 4000, //多少秒关闭
+                //             skin: 'punchClock-layer',
+                //             maxWidth: 710,
+                //             content: $(".punchClock")
+                //         });
+                //     } else {
+                //         alert("信息读取有误请再次打卡");
+                //     }
+                // }).catch(function (error) {
+                //     alert("error10086");
+                //     alert(error);
+                // });
+            } else {
+                alert("2019022718");
             }
         },
         //获取数据

@@ -122,7 +122,6 @@
   </div>
 </body>
 <script src="./js/vue.min.js"></script>
-<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 <script src="./js/jquery-1.12.4.min.js"></script>
 <script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
@@ -130,8 +129,13 @@
 <script src="./school_panel_content.js"></script>
 <script src="./index.js"></script>
 <script>
-  window.ikepu_js = vm.ikepu_js;
+  //window.ikepu_js = vm.ikepu_js;
   //ikepu_js('{"data":{"nfcid":"1"},"action":"nfc_login"}');
+  function ikepu_js(params) {
+    vm.ikepu_js(params);
+  }
+  ikepu_js('{"data":{"nfcid":"1"},"action":"nfc_login"}');
+
   $(function () {
     setTimeout(function () {
       $(".scroll").marquee({
@@ -139,6 +143,24 @@
         pauseOnHover: false
       });
     }, 50);
+
+
+
+    // function ajaxGetJson() {
+    //   $.ajax({
+    //     async: false,
+    //     method: 'GET',
+    //     dataType: "jsonp",
+    //     jsonp: "jsoncallback",
+    //     jsonpCallback: "success_jsonpCallback",
+    //     url: "http://23s662016z.imwork.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=1",
+    //     success: function (json) {
+    //       console.log(json);
+    //     }
+    //   });
+    // }
+
+    // ajaxGetJson();
   });
 </script>
 
