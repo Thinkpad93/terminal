@@ -127,14 +127,15 @@
 <script src="./js/swiper.min.js"></script>
 <script src="./layer.js"></script>
 <script src="./school_panel_content.js"></script>
+<script src="./js/mixin.js"></script>
 <script src="./index.js"></script>
 <script>
   //window.ikepu_js = vm.ikepu_js;
-  //ikepu_js('{"data":{"nfcid":"1"},"action":"nfc_login"}');
   function ikepu_js(params) {
     vm.ikepu_js(params);
   }
-  ikepu_js('{"data":{"nfcid":"1"},"action":"nfc_login"}');
+  //E2C2441B7F
+  //ikepu_js('{"data":{"nfcid":"E2C2441B7F"},"action":"nfc_login"}');
 
   $(function () {
     setTimeout(function () {
@@ -143,24 +144,6 @@
         pauseOnHover: false
       });
     }, 50);
-
-
-
-    // function ajaxGetJson() {
-    //   $.ajax({
-    //     async: false,
-    //     method: 'GET',
-    //     dataType: "jsonp",
-    //     jsonp: "jsoncallback",
-    //     jsonpCallback: "success_jsonpCallback",
-    //     url: "http://23s662016z.imwork.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=1",
-    //     success: function (json) {
-    //       console.log(json);
-    //     }
-    //   });
-    // }
-
-    // ajaxGetJson();
   });
 </script>
 

@@ -1,5 +1,6 @@
 var vm = new Vue({
     el: "#root",
+    mixins: [mixins],
     data: {
         punchUrl: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do",
         punchName: "",
@@ -32,50 +33,6 @@ var vm = new Vue({
 
         //栏目数据
         channelData: [],
-
-        //缺省的内容
-        local: false,
-        localImgList: [{
-                imageurl: "./local/slide1.jpg"
-            },
-            {
-                imageurl: "./local/slide2.jpg"
-            },
-            {
-                imageurl: "./local/slide3.jpg"
-            },
-            {
-                imageurl: "./local/slide4.jpg"
-            },
-            {
-                imageurl: "./local/slide5.jpg"
-            },
-            {
-                imageurl: "./local/slide6.jpg"
-            },
-            {
-                imageurl: "./local/slide7.jpg"
-            },
-            {
-                imageurl: "./local/slide8.jpg"
-            },
-            {
-                imageurl: "./local/slide9.jpg"
-            },
-            {
-                imageurl: "./local/slide10.jpg"
-            },
-            {
-                imageurl: "./local/slide11.jpg"
-            },
-            {
-                imageurl: "./local/slide12.jpg"
-            },
-            {
-                imageurl: "./local/slide13.jpg"
-            },
-        ]
-
     },
     watch: {
         //这里watch当前在显示的内容索引，从而初始化swiper
@@ -263,7 +220,8 @@ var vm = new Vue({
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://23s662016z.imwork.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" + req.data.nfcid,
+                    //url: "http://zc.qxiao.net/  http://23s662016z.imwork.net/
+                    url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" + req.data.nfcid,
                     success: function (res) {
                         if (res.studentName) {
                             that.punchName = res.studentName; //名称
@@ -282,7 +240,10 @@ var vm = new Vue({
                         }
 
                     },
-                    error: function (res) {}
+                    error: function (res) {
+                        layer.msg('打卡不正常，请重新打卡');
+                        alert(JSON.stringify(res));
+                    }
                 });
             }
         },
