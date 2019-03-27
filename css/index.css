@@ -35,7 +35,7 @@ iframe {
 
 ::-webkit-scrollbar-thumb {
     width: 10px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #aaa;
     opacity: .5;
 }
@@ -43,10 +43,10 @@ iframe {
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-track,
 ::-webkit-scrollbar-track-piece {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 0;
-    background: #f0f0f0;
+    background: #f2f2f2;
 }
 
 .main {
@@ -81,7 +81,7 @@ iframe {
 }
 
 
-.xMarquee {
+/* .xMarquee {
     overflow: hidden;
     position: absolute;
     left: 50%;
@@ -105,7 +105,7 @@ iframe {
     font-weight: 700;
     font-size: 34px;
     display: inline-block;
-}
+} */
 
 .video {
     overflow: hidden;
@@ -123,6 +123,19 @@ video {
 img {
     vertical-align: top;
     max-width: 100%;
+}
+
+.mask {
+    position: fixed;
+    left: 50%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 800;
+    width: 1080px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: translateX(-50%);
 }
 
 /** 打卡 **/
@@ -184,4 +197,176 @@ img {
 .punchClock-layer {
     background-color: transparent !important;
     box-shadow: none !important;
+}
+
+/** 学生作品 **/
+.interaction {
+    position: relative;
+}
+
+.interaction>img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 20;
+    transform: translate(-50%, -50%);
+}
+
+.interaction .aside {
+    width: 194px;
+    height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background-image: url(../interaction/image/works-aside.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.aside-box {
+    text-align: center;
+}
+
+.aside-box>img {
+    box-shadow: 2px 1px 2px 0 rgba(158, 157, 157, 0.8);
+}
+
+.aside-box strong {
+    font-size: 22px;
+    color: #40ba60;
+    font-weight: bold;
+    display: block;
+    margin: 20px 0;
+}
+
+.aside-box p {
+    color: #626262;
+}
+
+.works-box {
+    display: flex;
+    align-items: center;
+    height: 330px;
+    position: relative;
+    background-image: url(../interaction/image/works-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.works-box::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 15px;
+    background-image: url(../interaction/image/works-top-bg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.works-slide {
+    width: 244px;
+    height: 244px;
+    border: 3px solid #fff;
+    box-shadow: 2px 2px 2px 0 rgba(158, 157, 157, 0.8);
+}
+
+.works-small {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+}
+
+
+.full {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 850;
+    height: 820px;
+    width: 1080px;
+    background-image: url(../interaction/image/works-full.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    transition: transform ease 0.3s;
+    transform: translateY(100%);
+}
+
+.full-open {
+    transform: translateY(0);
+}
+
+.full-box {
+    position: relative;
+    height: 100%;
+}
+
+.praise {
+    position: absolute;
+    bottom: 8%;
+    right: 8%;
+    z-index: 10;
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.praise>div {
+    margin-top: 6px;
+}
+
+.tab {
+    position: relative;
+}
+
+.tab-head {
+    display: flex;
+}
+
+.tab-head .tab-item {
+    flex: 1;
+}
+
+.tab-head .tab-item div {
+    cursor: pointer;
+    width: 250px;
+    height: 126px;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+
+.finearts {
+    background-image: url(../interaction/image/finearts.png);
+
+}
+
+.finearts.active {
+    background-image: url(../interaction/image/finearts-active.png);
+}
+
+.calligraphy {
+    background-image: url(../interaction/image/calligraphy.png);
+}
+
+.calligraphy.active {
+    background-image: url(../interaction/image/calligraphy-active.png);
+}
+
+.homework {
+    background-image: url(../interaction/image/homework.png);
+}
+
+.homework.active {
+    background-image: url(../interaction/image/homework-active.png);
 }

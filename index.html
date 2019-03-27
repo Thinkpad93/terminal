@@ -10,10 +10,6 @@
   <meta name="x5-page-mode" content="app">
   <meta name="browsermode" content="application">
   <meta name="author" content="">
-  <!-- windows phone 点击无高光 -->
-  <meta name="msapplication-tap-highlight" content="no">
-  <meta content=yes name=apple-mobile-web-app-capable>
-  <meta content=yes name=apple-touch-fullscreen>
   <!-- 禁止将页面中的数字识别为电话号码 -->
   <meta name="format-detection" content="telephone=no,email=no">
   <!-- 不让百度转码 -->
@@ -27,43 +23,48 @@
 
 <body>
   <div id="root">
-    <!-- 显示打卡成功 -->
-    <div class="punchClock">
-      <div class="clock">
-        <div class="figure">
-          <img id="photo" :src="punchPhoto">
-          <p>你好,<strong id="uName">{{ punchName }}</strong>小朋友</p>
-          <div class="time" id="time">{{ punchTime }}</div>
+    <!-- 蒙版 -->
+    <div class="mask" v-show="maskFull" @click="handleCloseMask"></div>
+    <!-- 显示打卡成功 start -->
+    <transition name="clock-fade">
+      <div class="punchClock">
+        <div class="clock">
+          <div class="figure">
+            <img id="photo" :src="punchPhoto">
+            <p>你好,<strong id="uName">{{ punchName }}</strong>小朋友</p>
+            <div class="time" id="time">{{ punchTime }}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
+    <!-- 显示打卡成功 end -->
     <div class="main" :school="schoolname">
-      <!-- 播放缺省的内容 -->
+      <!-- 播放缺省的内容 start -->
       <template v-if="local">
         <div class="local" style="width:1080px;height: 1590px;">
           <div id="localImg" class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide stop-swiping" v-for="(d, index) in localImgList">
-                <img :src="d.imageurl" alt="" width="1080" height="1590" />
+                <img :src="d.image" width="1080" height="1590" />
               </div>
             </div>
           </div>
         </div>
       </template>
-      <!-- 滚动内容 -->
+      <!-- 播放缺省的内容 end -->
+      <!-- 滚动内容 start -->
       <template v-if="marquee.length">
-        <section class="scroll">
+        <div class="scroll">
           <ul class="infoList">
-            <li v-for="(item, index) in marquee" :key="index" :start="item.playTime" :end="item.endTime">
-              {{ item.scroll_content }}
-            </li>
+            <li v-for="(item, index) in marquee" :key="index">{{ item.scroll_content }}</li>
           </ul>
-        </section>
+        </div>
       </template>
-      <!-- 栏目 -->
-      <section :style="{display: index === channelIndex ? 'block': 'none'}" class="channel" :channel="channel.channelname"
-        :priority="channel.priority" :playstart="channel.playstarttime" :playend="channel.playendtime" v-for="(channel, index) in channelData"
-        :key="index">
+      <!-- 滚动内容 end -->
+      <!-- 栏目 start -->
+      <div :style="{display: index === channelIndex ? 'block': 'none'}" class="channel" :channel="channel.channelname"
+        :priority="channel.priority" :playstart="channel.playstarttime" :playend="channel.playendtime"
+        v-for="(channel, index) in channelData" :key="index">
         <template v-if="index === channelIndex">
           <div :title="child.title" :style="{display: cindex === channelContenIndex ? 'block': 'none'}" class="section"
             v-for="(child, cindex) in channel.contents" :key="cindex">
@@ -71,7 +72,7 @@
               <!-- 门户网站 html -->
               <template v-if="child.showtype === 6">
                 <img :src="protalUrl + 'image/empty.jpg'" style="display:none" @error="handleError" />
-                <img v-if="!frameVisible" src="./localImg/slide1.jpg" alt="" />
+                <img v-if="!frameVisible" src="./local/slide1.jpg" alt="" />
                 <iframe v-if="frameVisible" height="1590" id="poster" ref="iframe" :src="child.webUrl"></iframe>
               </template>
               <!-- 纯图片 -->
@@ -113,11 +114,88 @@
             </template>
           </div>
         </template>
-      </section>
+      </div>
+      <!-- 栏目 end -->
       <!-- 互动区 -->
-      <section class="interaction">
-        <img src="./interaction/image/interaction.jpg" alt="" width="1080" height="330">
-      </section>
+      <div class="interaction">
+        <img src="./interaction/image/loading.gif" v-if="!worksVisible" class="loading">
+        <div class="aside">
+          <div class="aside-box">
+            <img src="./interaction/image/qcode.png" width="120" height="120">
+            <strong>小Q智慧</strong>
+            <p>更多精彩，关注公众号</p>
+          </div>
+        </div>
+        <div class="works-box">
+          <div class="swiper-container" v-if="worksVisible">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide works-slide stop-swiping" v-for="(w, index) in worksList" :key="w.worksId"
+                @click="handleSlideClick(w, index)">
+                <!-- <img :src="w.smallUrl"> -->
+                <div :style="{backgroundImage: 'url(' + w.smallUrl + ')'}" class="works-small"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 弹出框 -->
+        <div class="full" :class="{'full-open': maskFull}">
+          <div class=" full-box">
+            <div class="tab">
+              <div class="tab-head">
+                <div class="tab-item" @click.stop="handleTabClick(1)">
+                  <div class="finearts" :class="[worksType === 1 ? 'active': '']"></div>
+                </div>
+                <div class="tab-item" @click.stop="handleTabClick(2)">
+                  <div class="calligraphy" :class="[worksType === 2 ? 'active': '']"></div>
+                </div>
+                <div class="tab-item" @click.stop="handleTabClick(3)">
+                  <div class="homework" :class="[worksType === 3 ? 'active': '']"></div>
+                </div>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide" v-for="(w, index) in worksList" :key="w.worksId">
+                        <img :src="w.imageUrl" width="690" height="690">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 美术作品 -->
+                <!-- <div class="tab-pane" :class="[worksType === 1 ? 'pane-on': '']">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"></div>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- 书法作品 -->
+                <!-- <div class="tab-pane" :class="[worksType === 2 ? 'pane-on': '']">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"></div>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- 优秀作业 -->
+                <!-- <div class="tab-pane" :class="[worksType === 3 ? 'pane-on': '']">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"></div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <!-- <div class="praise">
+              <img src="./interaction/image/works-praise.png" alt="" width="102" height="106">
+              <div>12</div>
+            </div> -->
+          </div>
+        </div>
+        <!-- <img src="./interaction/image/interaction.jpg" alt="" width="1080" height="330"> -->
+      </div>
     </div>
   </div>
 </body>
@@ -125,17 +203,18 @@
 <script src="./js/jquery-1.12.4.min.js"></script>
 <script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
+<script src="./js/dayjs.min.js"></script>
 <script src="./layer.js"></script>
 <script src="./school_panel_content.js"></script>
 <script src="./js/mixin.js"></script>
 <script src="./index.js"></script>
 <script>
   //window.ikepu_js = vm.ikepu_js;
+  //ikepu_js('{"data":{"nfcid":"E2C2441B7F"},"action":"nfc_login"}');
+  //打卡函数调用
   function ikepu_js(params) {
     vm.ikepu_js(params);
   }
-  //E2C2441B7F
-  //ikepu_js('{"data":{"nfcid":"E2C2441B7F"},"action":"nfc_login"}');
 
   $(function () {
     setTimeout(function () {

@@ -3,17 +3,17 @@ var channels = {
     "schoolname": "幼儿园",
     "scrollContents": [{
             "playTime": "2018-11-19",
-            "endTime": "2018-12-30",
+            "endTime": "2019-12-30",
             "scroll_content": "由于孝宗多难的童年使得他的身体一直不好，他希望通过佛道之术能改变自己的身体状况。因此一些奸佞之辈再次混入宫中，再次祸乱朝政。"
         },
         {
             "playTime": "2018-11-19",
-            "endTime": "2018-12-30",
+            "endTime": "2019-10-30",
             "scroll_content": "后来李广畏罪自杀，孝宗以为李广家中有天书，命人搜寻，却搜出了李广贪污、受贿的账本，孝宗这才醒悟。"
         },
         {
             "playTime": "2018-11-25",
-            "endTime": "2018-12-30",
+            "endTime": "2019-09-30",
             "scroll_content": "做一个好人"
         }
     ],

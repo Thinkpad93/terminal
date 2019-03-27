@@ -2,10 +2,9 @@ var vm = new Vue({
     el: "#root",
     mixins: [mixins],
     data: {
-        punchUrl: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do",
-        punchName: "",
-        punchPhoto: "",
-        punchTime: "",
+        punchName: "", //学生名称
+        punchPhoto: "", //头像
+        punchTime: "", //打卡时间 
         protalUrl: "",
         frameVisible: true,
         swiper: null,
@@ -220,7 +219,6 @@ var vm = new Vue({
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    //url: "http://zc.qxiao.net/  http://23s662016z.imwork.net/
                     url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" + req.data.nfcid,
                     success: function (res) {
                         if (res.studentName) {
@@ -263,7 +261,12 @@ var vm = new Vue({
                     autoplay: {
                         delay: 30000,
                     },
-                    speed: 1000,
+                    // effect: 'flip',
+                    // flipEffect: {
+                    //     slideShadows: true,
+                    //     limitRotation: true,
+                    // },
+                    speed: 800,
                     loop: true,
                     noSwiping: true,
                     noSwipingClass: 'stop-swiping'
@@ -277,7 +280,12 @@ var vm = new Vue({
                     autoplay: {
                         delay: 30000,
                     },
-                    speed: 1000,
+                    // effect: 'flip',
+                    // flipEffect: {
+                    //     slideShadows: true,
+                    //     limitRotation: true,
+                    // },
+                    speed: 800,
                     loop: true,
                     noSwiping: true,
                     noSwipingClass: 'stop-swiping'
@@ -302,7 +310,7 @@ var vm = new Vue({
         init: function () {
             this.getSchoolData();
         },
-        //当网络访问不到时，图片加载出错事件
+        //当网络访问不到时，加载图片出错事件
         handleError() {
             this.frameVisible = false;
         },
@@ -310,6 +318,9 @@ var vm = new Vue({
     mounted: function () {
         var that = this;
         this.init();
+        this.worksSmallSwiperInit();
+        this.worksBigSwiperInit();
+        //this.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
         setInterval(function () {
             console.log("30秒刷新数据!");
             that.init();
