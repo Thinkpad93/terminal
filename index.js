@@ -2,9 +2,7 @@ var vm = new Vue({
     el: "#root",
     mixins: [mixins],
     data: {
-        punchName: "", //学生名称
-        punchPhoto: "", //头像
-        punchTime: "", //打卡时间 
+        student: {}, //学生信息
         protalUrl: "",
         frameVisible: true,
         swiper: null,
@@ -31,7 +29,7 @@ var vm = new Vue({
         marquee: [],
 
         //栏目数据
-        channelData: [],
+        channelData: []
     },
     watch: {
         //这里watch当前在显示的内容索引，从而初始化swiper
@@ -41,6 +39,19 @@ var vm = new Vue({
         local: function (newVal, oldVal) {
             this.swiperLocalInit();
         },
+        worksVisible(newVal, oldVal) {
+            this.worksSmallSwiperInit();
+            this.worksBigSwiperInit();
+        },
+        maskFull(newVal, oldVal) {
+            if (newVal === false) {
+                //有作品类别聚集，关闭大图模式查看后重新初始化列表
+                if (this.worksType !== 0) {
+                    this.worksType = 0;
+                    this.worksBigList = this.worksList;
+                }
+            }
+        }
     },
     methods: {
         //添加补0操作
@@ -56,7 +67,7 @@ var vm = new Vue({
             var year = d.getFullYear(), //年
                 mouth = this.fill(d.getMonth() + 1), //月
                 day = this.fill(d.getDate()), //日
-                hours = this.fill(d.getHours()), //时 
+                hours = this.fill(d.getHours()), //时
                 minutes = this.fill(d.getMinutes()), //分
                 seconds = this.fill(d.getSeconds()); //秒
 
@@ -77,18 +88,16 @@ var vm = new Vue({
                 var validstarttime = scrolls.playTime + " " + "00:00:00"; //滚动开始时间
                 var validendtime = scrolls.endTime + " " + "23:59:59"; //滚动结束时间
                 //字符串转时间戳
-                var start = new Date(validstarttime.replace(/-/g, '/')).getTime();
-                var end = new Date(validendtime.replace(/-/g, '/')).getTime();
+                var start = new Date(validstarttime.replace(/-/g, "/")).getTime();
+                var end = new Date(validendtime.replace(/-/g, "/")).getTime();
                 //跟当前时间对比时间戳
                 if (now > start && now <= end) {
                     isPlayScroll.push(scrolls);
-                } else {
-
-                }
+                } else {}
             }
             //找到滚动内容
             if (isPlayScroll.length) {
-                console.log(isPlayScroll);
+                //console.log(isPlayScroll);
                 this.marquee = isPlayScroll;
             }
         },
@@ -106,8 +115,11 @@ var vm = new Vue({
                 var playstarttime = channels.playstarttime;
                 var playendtime = channels.playendtime;
                 //字符串转时间戳
-                var startTime = (validstarttime + " " + playstarttime).replace(/-/g, '/');
-                var endTime = (validendtime + " " + playendtime).replace(/-/g, '/');
+                var startTime = (validstarttime + " " + playstarttime).replace(
+                    /-/g,
+                    "/"
+                );
+                var endTime = (validendtime + " " + playendtime).replace(/-/g, "/");
                 var start = new Date(startTime).getTime();
                 var end = new Date(endTime).getTime();
                 //跟当前时间对比时间戳
@@ -156,19 +168,21 @@ var vm = new Vue({
             var prioritySort = priorityArr.sort(); //简单的排序
             var priorityMax = prioritySort[prioritySort.length - 1]; //栏目等级最高
             var resultChannel = channels.find(function (elem) {
-                return elem.priority === priorityMax
+                return elem.priority === priorityMax;
             });
             //这里找出栏目名称相同的 播放等级相同的  (还有就是播放开始时间相同的)
             if (Object.keys(resultChannel).length) {
                 index = this.channelData.findIndex(function (elem) {
-                    return elem.channelname === resultChannel.channelname &&
+                    return (
+                        elem.channelname === resultChannel.channelname &&
                         elem.priority === resultChannel.priority &&
-                        resultChannel.playstarttime === elem.playstarttime;
+                        resultChannel.playstarttime === elem.playstarttime
+                    );
                 });
                 return {
                     index: index,
                     showChannels: resultChannel
-                }
+                };
             }
         },
         //播放栏目内容
@@ -213,33 +227,26 @@ var vm = new Vue({
             var req = JSON.parse(json_str);
             var that = this;
             //打卡类别 0-NFC打卡 1-ibeacon打卡
-            if (req.action === 'nfc_login') {
+            if (req.action === "nfc_login") {
                 $.ajax({
-                    type: 'GET',
+                    type: "GET",
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" + req.data.nfcid,
+                    url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
+                        req.data.nfcid,
                     success: function (res) {
                         if (res.studentName) {
-                            that.punchName = res.studentName; //名称
-                            that.punchPhoto = res.photo; //头像
-                            that.punchTime = res.time; //打卡时间
-                            layer.open({
-                                type: 1,
-                                title: false,
-                                shade: 0,
-                                closeBtn: 0,
-                                time: 4000, //多少秒关闭
-                                skin: 'punchClock-layer',
-                                maxWidth: 710,
-                                content: $(".punchClock")
-                            });
+                            that.clockVisible = true;
+                            that.student = res;
+                            setTimeout(function () {
+                                that.clockVisible = false;
+                            }, 4000);
                         }
-
                     },
                     error: function (res) {
-                        layer.msg('打卡不正常，请重新打卡');
+                        that.clockVisible = false;
+                        layer.msg("打卡不正常，请重新打卡");
                         alert(JSON.stringify(res));
                     }
                 });
@@ -257,28 +264,23 @@ var vm = new Vue({
         //初始化本地swiper 播放缺省内容
         swiperLocalInit() {
             this.$nextTick(function () {
-                new Swiper('#localImg', {
+                new Swiper("#localImg", {
                     autoplay: {
-                        delay: 30000,
+                        delay: 30000
                     },
-                    // effect: 'flip',
-                    // flipEffect: {
-                    //     slideShadows: true,
-                    //     limitRotation: true,
-                    // },
                     speed: 800,
                     loop: true,
                     noSwiping: true,
-                    noSwipingClass: 'stop-swiping'
+                    noSwipingClass: "stop-swiping"
                 });
             });
         },
         //初始化swiper
         swiperInit: function () {
             this.$nextTick(function () {
-                this.swiper = new Swiper('.channel .swiper-container', {
+                this.swiper = new Swiper(".channel .swiper-container", {
                     autoplay: {
-                        delay: 30000,
+                        delay: 30000
                     },
                     // effect: 'flip',
                     // flipEffect: {
@@ -288,7 +290,7 @@ var vm = new Vue({
                     speed: 800,
                     loop: true,
                     noSwiping: true,
-                    noSwipingClass: 'stop-swiping'
+                    noSwipingClass: "stop-swiping"
                 });
             });
         },
@@ -305,7 +307,7 @@ var vm = new Vue({
                     }
                 }
             }
-            this.protalUrl = url.substring(0, url.lastIndexOf('index'));
+            this.protalUrl = url.substring(0, url.lastIndexOf("index"));
         },
         init: function () {
             this.getSchoolData();
@@ -313,14 +315,12 @@ var vm = new Vue({
         //当网络访问不到时，加载图片出错事件
         handleError() {
             this.frameVisible = false;
-        },
+        }
     },
     mounted: function () {
         var that = this;
         this.init();
-        this.worksSmallSwiperInit();
-        this.worksBigSwiperInit();
-        //this.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
+        this.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
         setInterval(function () {
             console.log("30秒刷新数据!");
             that.init();

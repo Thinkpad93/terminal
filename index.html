@@ -24,15 +24,15 @@
 <body>
   <div id="root">
     <!-- 蒙版 -->
-    <div class="mask" v-show="maskFull" @click="handleCloseMask"></div>
+    <div class="mask" v-show="maskFull" @click="maskFull = !maskFull"></div>
     <!-- 显示打卡成功 start -->
     <transition name="clock-fade">
-      <div class="punchClock">
+      <div class="punchClock" v-show="clockVisible">
         <div class="clock">
           <div class="figure">
-            <img id="photo" :src="punchPhoto">
-            <p>你好,<strong id="uName">{{ punchName }}</strong>小朋友</p>
-            <div class="time" id="time">{{ punchTime }}</div>
+            <img id="photo" :src="student.photo">
+            <p>你好,<strong id="uName">{{ student.studentName }}</strong>小朋友</p>
+            <div class="time" id="time">{{ student.time }}</div>
           </div>
         </div>
       </div>
@@ -137,10 +137,11 @@
             </div>
           </div>
         </div>
-        <!-- 弹出框 -->
+        <!-- 弹出大图查看 start -->
         <div class="full" :class="{'full-open': maskFull}">
           <div class=" full-box">
             <div class="tab">
+              <!-- 作品类别 start -->
               <div class="tab-head">
                 <div class="tab-item" @click.stop="handleTabClick(1)">
                   <div class="finearts" :class="[worksType === 1 ? 'active': '']"></div>
@@ -152,49 +153,29 @@
                   <div class="homework" :class="[worksType === 3 ? 'active': '']"></div>
                 </div>
               </div>
+              <!-- 作品类别 end -->
               <div class="tab-content">
                 <div class="tab-pane">
                   <div class="swiper-container">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide" v-for="(w, index) in worksList" :key="w.worksId">
-                        <img :src="w.imageUrl" width="690" height="690">
+                      <div class="swiper-slide works-big-slide" v-for="(w, index) in worksBigList" :key="w.worksId">
+                        <div :style="{backgroundImage: 'url(' + w.imageUrl + ')'}" class="works-big"></div>
+                        <!-- <img :src="w.imageUrl" width="auto" height="auto"> -->
+                        <!-- 点赞 start -->
+                        <div class="praise" @click.stop="handlePraise(w)">
+                          <img src="./interaction/image/works-praise.png" alt="" width="102" height="106">
+                          <div>{{ w.praise }}</div>
+                        </div>
+                        <!-- 点赞 end -->
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- 美术作品 -->
-                <!-- <div class="tab-pane" :class="[worksType === 1 ? 'pane-on': '']">
-                  <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide"></div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- 书法作品 -->
-                <!-- <div class="tab-pane" :class="[worksType === 2 ? 'pane-on': '']">
-                  <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide"></div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- 优秀作业 -->
-                <!-- <div class="tab-pane" :class="[worksType === 3 ? 'pane-on': '']">
-                  <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide"></div>
-                    </div>
-                  </div>
-                </div> -->
               </div>
             </div>
-            <!-- <div class="praise">
-              <img src="./interaction/image/works-praise.png" alt="" width="102" height="106">
-              <div>12</div>
-            </div> -->
           </div>
         </div>
-        <!-- <img src="./interaction/image/interaction.jpg" alt="" width="1080" height="330"> -->
+        <!-- 弹出大图查看 end -->
       </div>
     </div>
   </div>
@@ -203,8 +184,6 @@
 <script src="./js/jquery-1.12.4.min.js"></script>
 <script src="./js/jquery.marquee.min.js"></script>
 <script src="./js/swiper.min.js"></script>
-<script src="./js/dayjs.min.js"></script>
-<script src="./layer.js"></script>
 <script src="./school_panel_content.js"></script>
 <script src="./js/mixin.js"></script>
 <script src="./index.js"></script>

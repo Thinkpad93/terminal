@@ -51,7 +51,7 @@ iframe {
 
 .main {
     width: 1080px;
-    height: 1920px;
+    min-height: 1920px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -80,32 +80,6 @@ iframe {
     margin: 26px 200px 0 0;
 }
 
-
-/* .xMarquee {
-    overflow: hidden;
-    position: absolute;
-    left: 50%;
-    top: 100px;
-    z-index: 100;
-    height: 100px;
-    width: 1080px;
-    color: #f00;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-.xMarquee ol {
-    width: 10000px;
-}
-
-.xMarquee li {
-    float: left;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    font-size: 34px;
-    display: inline-block;
-} */
 
 .video {
     overflow: hidden;
@@ -140,10 +114,20 @@ img {
 
 /** 打卡 **/
 .punchClock {
-    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1000;
+    width: 640px;
+    height: 552px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate3d(-50%, -50%, 0);
+    background-image: url("../punch-clock-success.png");
 }
 
-.punchClock .clock {
+/* .punchClock .clock {
     width: 640px;
     height: 552px;
     background-image: url("../punch-clock-success.png");
@@ -151,7 +135,7 @@ img {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-}
+} */
 
 .punchClock .figure {
     padding-top: 72px;
@@ -194,10 +178,50 @@ img {
     transform: translateX(-50%);
 }
 
-.punchClock-layer {
+/* .punchClock-layer {
     background-color: transparent !important;
     box-shadow: none !important;
+} */
+
+.clock-fade-enter-active {
+    animation: dialog-fade-in 0.2s;
 }
+
+.clock-fade-leave-active {
+    animation: dialog-fadde-out 0.2s;
+}
+
+@keyframes dialog-fade-in {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) scale(0.7);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0) scale(1);
+    }
+}
+
+@keyframes dialog-fadde-out {
+    0% {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) scale(0.7);
+    }
+}
+
+
+
+
+
+
+
+
 
 /** 学生作品 **/
 .interaction {
@@ -279,11 +303,27 @@ img {
 
 .works-small {
     height: 100%;
+    background-color: #fff;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
+    background-size: contain;
+}
+
+
+.works-big-slide {
+    height: 620px;
+}
+
+.works-big {
+    height: 620px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
 
 }
+
 
 
 .full {
@@ -296,7 +336,7 @@ img {
     background-image: url(../interaction/image/works-full.png);
     background-repeat: no-repeat;
     background-position: 0 0;
-    transition: transform ease 0.3s;
+    transition: transform ease 0.4s;
     transform: translateY(100%);
 }
 
@@ -309,10 +349,13 @@ img {
     height: 100%;
 }
 
+
+/** 点赞 **/
 .praise {
+    cursor: pointer;
     position: absolute;
-    bottom: 8%;
-    right: 8%;
+    bottom: 2%;
+    right: 4%;
     z-index: 10;
     font-size: 20px;
     font-weight: bold;
@@ -323,6 +366,8 @@ img {
 .praise>div {
     margin-top: 6px;
 }
+
+/** 点赞 **/
 
 .tab {
     position: relative;
