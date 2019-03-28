@@ -45,7 +45,7 @@ var vm = new Vue({
         },
         maskFull(newVal, oldVal) {
             if (newVal === false) {
-                //有作品类别聚集，关闭大图模式查看后重新初始化列表
+                //用户点了作品类别，关闭大图模式查看后重新初始化列表
                 if (this.worksType !== 0) {
                     this.worksType = 0;
                     this.worksBigList = this.worksList;
@@ -282,11 +282,6 @@ var vm = new Vue({
                     autoplay: {
                         delay: 30000
                     },
-                    // effect: 'flip',
-                    // flipEffect: {
-                    //     slideShadows: true,
-                    //     limitRotation: true,
-                    // },
                     speed: 800,
                     loop: true,
                     noSwiping: true,

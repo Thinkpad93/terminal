@@ -178,42 +178,8 @@ img {
     transform: translateX(-50%);
 }
 
-/* .punchClock-layer {
-    background-color: transparent !important;
-    box-shadow: none !important;
-} */
 
-.clock-fade-enter-active {
-    animation: dialog-fade-in 0.2s;
-}
 
-.clock-fade-leave-active {
-    animation: dialog-fadde-out 0.2s;
-}
-
-@keyframes dialog-fade-in {
-    0% {
-        opacity: 0;
-        transform: translate3d(-50%, -50%, 0) scale(0.7);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate3d(-50%, -50%, 0) scale(1);
-    }
-}
-
-@keyframes dialog-fadde-out {
-    0% {
-        opacity: 1;
-        transform: translate3d(-50%, -50%, 0) scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate3d(-50%, -50%, 0) scale(0.7);
-    }
-}
 
 
 
@@ -367,6 +333,21 @@ img {
     margin-top: 6px;
 }
 
+.praise-tip {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+
 /** 点赞 **/
 
 .tab {
@@ -414,4 +395,36 @@ img {
 
 .homework.active {
     background-image: url(../interaction/image/homework-active.png);
+}
+
+.clock-fade-enter-active {
+    animation: dialog-fade-in 0.2s;
+}
+
+.clock-fade-leave-active {
+    animation: dialog-fadde-out 0.2s;
+}
+
+@keyframes dialog-fade-in {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) scale(0.7);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0) scale(1);
+    }
+}
+
+@keyframes dialog-fadde-out {
+    0% {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) scale(0.7);
+    }
 }

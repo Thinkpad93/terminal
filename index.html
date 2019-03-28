@@ -9,13 +9,13 @@
   <meta name="renderer" content="webkit">
   <meta name="x5-page-mode" content="app">
   <meta name="browsermode" content="application">
-  <meta name="author" content="">
+  <meta name="author" content="Yolo">
   <!-- 禁止将页面中的数字识别为电话号码 -->
   <meta name="format-detection" content="telephone=no,email=no">
   <!-- 不让百度转码 -->
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <link rel="shortcut icon" href="./favicon.ico">
-  <title>屏端控制</title>
+  <title>屏端播放控制</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/swiper.min.css">
   <link rel="stylesheet" href="css/index.css">
@@ -45,7 +45,7 @@
           <div id="localImg" class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide stop-swiping" v-for="(d, index) in localImgList">
-                <img :src="d.image" width="1080" height="1590" />
+                <img :src="d.image" width="1080" height="1590">
               </div>
             </div>
           </div>
@@ -71,8 +71,8 @@
             <template v-if="cindex === channelContenIndex">
               <!-- 门户网站 html -->
               <template v-if="child.showtype === 6">
-                <img :src="protalUrl + 'image/empty.jpg'" style="display:none" @error="handleError" />
-                <img v-if="!frameVisible" src="./local/slide1.jpg" alt="" />
+                <img :src="protalUrl + 'image/empty.jpg'" style="display:none" @error="handleError">
+                <img v-if="!frameVisible" src="./local/slide1.jpg" alt="">
                 <iframe v-if="frameVisible" height="1590" id="poster" ref="iframe" :src="child.webUrl"></iframe>
               </template>
               <!-- 纯图片 -->
@@ -80,7 +80,7 @@
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images">
-                      <img :src="slide.imageurl" alt="" width="1080" height="1590" />
+                      <img :src="slide.imageurl" alt="" width="1080" height="1590">
                     </div>
                   </div>
                 </div>
@@ -93,7 +93,7 @@
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                      <img :src="slide.imageurl" alt="" width="1080" height="982" />
+                      <img :src="slide.imageurl" alt="" width="1080" height="982">
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide stop-swiping" v-for="(slide, index) in child.images" :key="index">
-                      <img :src="slide.imageurl" alt="" width="1080" height="982" />
+                      <img :src="slide.imageurl" alt="" width="1080" height="982">
                     </div>
                   </div>
                 </div>
@@ -131,7 +131,6 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide works-slide stop-swiping" v-for="(w, index) in worksList" :key="w.worksId"
                 @click="handleSlideClick(w, index)">
-                <!-- <img :src="w.smallUrl"> -->
                 <div :style="{backgroundImage: 'url(' + w.smallUrl + ')'}" class="works-small"></div>
               </div>
             </div>
@@ -139,7 +138,14 @@
         </div>
         <!-- 弹出大图查看 start -->
         <div class="full" :class="{'full-open': maskFull}">
-          <div class=" full-box">
+          <div class="full-box">
+            <!-- 点赞成功提示 start -->
+            <transition name="clock-fade">
+              <div class="praise-tip" v-if="praiseVisible">
+                <img src="./interaction/image/praise-success.png">
+              </div>
+            </transition>
+            <!-- 点赞成功提示 end -->
             <div class="tab">
               <!-- 作品类别 start -->
               <div class="tab-head">
@@ -160,7 +166,6 @@
                     <div class="swiper-wrapper">
                       <div class="swiper-slide works-big-slide" v-for="(w, index) in worksBigList" :key="w.worksId">
                         <div :style="{backgroundImage: 'url(' + w.imageUrl + ')'}" class="works-big"></div>
-                        <!-- <img :src="w.imageUrl" width="auto" height="auto"> -->
                         <!-- 点赞 start -->
                         <div class="praise" @click.stop="handlePraise(w)">
                           <img src="./interaction/image/works-praise.png" alt="" width="102" height="106">

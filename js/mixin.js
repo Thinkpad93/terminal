@@ -7,6 +7,8 @@ var mixins = {
         worksType: 0,
         maskFull: false,
         worksBigSwiper: null,
+        //点赞
+        praiseVisible: false,
         //缺省的内容
         local: false,
         localImgList: [{
@@ -91,7 +93,6 @@ var mixins = {
                     slidesPerView: 'auto',
                     centeredSlides: true,
                     spaceBetween: 20,
-                    //freeMode: true
                 });
             });
         },
@@ -119,12 +120,14 @@ var mixins = {
                     success: function (res) {
                         if (res.parise || res.worksId) {
                             obj.praise = res.parise;
-                            // that.worksBigList.forEach(function (elem, index) {
-                            //     if (elem.worksId === parseInt(res.worksId)) {
-                            //         elem.praise = res.parise;
-                            //     }
-                            // });
+                            that.praiseVisible = true;
+                            setTimeout(function () {
+                                that.praiseVisible = false;
+                            }, 2000);
                         }
+                    },
+                    error: function (res) {
+                        that.praiseVisible = false;
                     }
                 });
             }
@@ -142,10 +145,9 @@ var mixins = {
                     success: function (res) {
                         var data = res.detail;
                         if (data.length) {
-                            //1-美术，2-书法，3-作业
                             that.worksVisible = true;
-                            that.worksList = data;
-                            that.worksBigList = data;
+                            that.worksList = data; //小图列表
+                            that.worksBigList = data; //大图列表
                         }
                     },
                     error: function (res) {
