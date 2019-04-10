@@ -81,13 +81,21 @@ var mixins = {
         },
         //作品小图swiper
         worksSmallSwiperInit() {
+            var that = this;
             this.$nextTick(function () {
                 new Swiper('.works-box .swiper-container', {
+                    on: {
+                        //到了最后一个slide
+                        reachEnd: function () {
+                            console.log("到了最后一个slide");
+                            that.worksVisible = false;
+                            that.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
+                        }
+                    },
                     autoplay: {
                         delay: 5000,
                     },
                     speed: 800,
-                    //loop: true,
                     noSwiping: true,
                     noSwipingClass: 'stop-swiping',
                     slidesPerView: 'auto',
@@ -98,6 +106,7 @@ var mixins = {
         },
         //作品大图swiper
         worksBigSwiperInit() {
+            var that = this;
             this.$nextTick(function () {
                 this.worksBigSwiper = new Swiper('.tab-pane .swiper-container', {
                     slidesPerView: 1,
@@ -116,7 +125,7 @@ var mixins = {
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://192.168.18.113:8081/qxiao-cms/action/mod-xiaojiao/works/addPraise.do?worksId=" + obj.worksId,
+                    url: "http://192.168.18.253:8081/qxiao-cms/action/mod-xiaojiao/works/addPraise.do?worksId=" + obj.worksId,
                     success: function (res) {
                         if (res.parise || res.worksId) {
                             obj.praise = res.parise;
@@ -141,7 +150,7 @@ var mixins = {
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://192.168.18.113:8081/qxiao-cms/action/mod-xiaojiao/works/queryWorksTerminal.do?mac=" + mac,
+                    url: "http://192.168.18.253:8081/qxiao-cms/action/mod-xiaojiao/works/queryWorksTerminal.do?mac=" + mac,
                     success: function (res) {
                         var data = res.detail;
                         if (data.length) {

@@ -320,5 +320,9 @@ var vm = new Vue({
             console.log("30秒刷新数据!");
             that.init();
         }, that.minutes);
+        // setInterval(function () {
+        //     console.log("10分钟后刷新数据!");
+        //     that.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
+        // }, 10 * 60 * 1000);
     }
 });
