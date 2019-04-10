@@ -15,6 +15,8 @@ var vm = new Vue({
 
         //学校名称
         schoolname: "",
+        //学校mac地址
+        mac: "",
 
         //栏目
         channelIndex: -1,
@@ -50,6 +52,8 @@ var vm = new Vue({
                     this.worksType = 0;
                     this.worksBigList = this.worksList;
                 }
+                //清除定时器
+                clearTimeout(this.maskFullTimer);
             }
         }
     },
@@ -246,8 +250,8 @@ var vm = new Vue({
                     },
                     error: function (res) {
                         that.clockVisible = false;
-                        layer.msg("打卡不正常，请重新打卡");
-                        alert(JSON.stringify(res));
+                        //layer.msg("打卡不正常，请重新打卡");
+                        console.log(JSON.stringify(res));
                     }
                 });
             }
@@ -255,6 +259,7 @@ var vm = new Vue({
         //获取数据
         getSchoolData: function () {
             this.schoolname = channels.schoolname; //学校名称
+            this.mac = channels.mac; //学校mac地址
             this.channelData = channels.playchannel; //栏目数据
             this.scrollData = channels.scrollContents || []; //滚动数据
             this.getPlayChannels();
@@ -315,14 +320,10 @@ var vm = new Vue({
     mounted: function () {
         var that = this;
         this.init();
-        this.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
+        this.queryWorksTerminal(this.mac); //获取学生作品
         setInterval(function () {
             console.log("30秒刷新数据!");
             that.init();
         }, that.minutes);
-        // setInterval(function () {
-        //     console.log("10分钟后刷新数据!");
-        //     that.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
-        // }, 10 * 60 * 1000);
     }
 });

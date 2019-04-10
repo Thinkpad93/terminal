@@ -2,6 +2,10 @@ var mixins = {
     data: {
         //打卡
         clockVisible: false,
+        //大图查看模式定时器
+        maskFullTimer: null,
+        //作品定时器
+        worksTimer: null,
         //作品
         worksVisible: false,
         worksType: 0,
@@ -57,11 +61,16 @@ var mixins = {
     methods: {
         //点击作品小图
         handleSlideClick(obj, index) {
+            var that = this;
             if ('type' in obj) {
                 this.maskFull = true;
                 //切换到指定的slide
                 this.worksBigSwiper.slideTo(index, 100, false);
             }
+            //当停留时间过长时，自动关闭
+            this.maskFullTimer = setTimeout(function () {
+                that.maskFull = false;
+            }, 20 * 1000);
         },
         //点击作品类别
         handleTabClick(type) {
@@ -89,7 +98,7 @@ var mixins = {
                         reachEnd: function () {
                             console.log("到了最后一个slide");
                             that.worksVisible = false;
-                            that.queryWorksTerminal("44:45:53:54:00:08"); //获取学生作品
+                            that.queryWorksTerminal(that.mac); //获取学生作品
                         }
                     },
                     autoplay: {
@@ -109,6 +118,11 @@ var mixins = {
             var that = this;
             this.$nextTick(function () {
                 this.worksBigSwiper = new Swiper('.tab-pane .swiper-container', {
+                    on: {
+                        slideChangeTransitionEnd: function () {
+                            console.log('swiper从一个slide过渡到另一个slide结束时执行');
+                        }
+                    },
                     slidesPerView: 1,
                     //真正的核心部分在
                     //修改swiper自己或子元素时，自动初始化swiper 
@@ -148,22 +162,36 @@ var mixins = {
                 $.ajax({
                     type: 'GET',
                     dataType: "jsonp",
+                    timeout: 5000, // 添加timeout参数  
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
                     url: "http://192.168.18.253:8081/qxiao-cms/action/mod-xiaojiao/works/queryWorksTerminal.do?mac=" + mac,
                     success: function (res) {
                         var data = res.detail;
                         if (data.length) {
+                            console.log("请求成功");
+                            //清除定时器
+                            clearTimeout(that.worksTimer);
                             that.worksVisible = true;
                             that.worksList = data; //小图列表
                             that.worksBigList = data; //大图列表
                         }
                     },
-                    error: function (res) {
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("网络发生错误");
                         that.worksVisible = false;
-                        console.log(JSON.stringify(res));
+                        //清除定时器
+                        clearTimeout(that.worksTimer);
+                        //重新请求
+                        that.worksTimer = setTimeout(function () {
+                            that.queryWorksTerminal(that.mac);
+                        }, 10 * 1000);
                     }
                 });
+            } else {
+                console.log("mac地址没有传过来");
+                //如果没能正确获取到mac地址
+                that.worksVisible = false; //loading
             }
         }
     },
