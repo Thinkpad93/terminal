@@ -53,7 +53,9 @@ var vm = new Vue({
                     this.worksBigList = this.worksList;
                 }
                 //清除定时器
-                clearTimeout(this.maskFullTimer);
+                clearInterval(this.maskFullTimer);
+                //开启小图的自己播放功能
+                this.worksSmallSwiper.autoplay.start();
             }
         }
     },

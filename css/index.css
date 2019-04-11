@@ -69,8 +69,15 @@ iframe {
     height: 100px;
     width: 1080px;
     color: #f00;
+    overflow: hidden;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.6);
+}
+
+.infoList {
+    display: flex;
+    height: 100px;
+    align-items: center;
 }
 
 .scroll li {
@@ -78,7 +85,8 @@ iframe {
     font-weight: 700;
     font-size: 34px;
     display: inline-block;
-    margin: 26px 200px 0 0;
+    margin: 0 200px 0 0;
+    white-space: nowrap;
 }
 
 

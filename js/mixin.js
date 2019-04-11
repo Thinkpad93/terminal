@@ -10,9 +10,12 @@ var mixins = {
         worksVisible: false,
         worksType: 0,
         maskFull: false,
+        worksSmallSwiper: null,
         worksBigSwiper: null,
         //点赞
         praiseVisible: false,
+        //点击值
+        clickCount: 0,
         //缺省的内容
         local: false,
         localImgList: [{
@@ -59,6 +62,10 @@ var mixins = {
         worksBigList: [],
     },
     methods: {
+        //定时关闭大图查看模式
+        handleCloseFull() {
+
+        },
         //点击作品小图
         handleSlideClick(obj, index) {
             var that = this;
@@ -68,9 +75,11 @@ var mixins = {
                 this.worksBigSwiper.slideTo(index, 100, false);
             }
             //当停留时间过长时，自动关闭
-            this.maskFullTimer = setTimeout(function () {
+            this.maskFullTimer = setInterval(function () {
                 that.maskFull = false;
             }, 20 * 1000);
+            //暂时小图自动播放功能
+            this.worksSmallSwiper.autoplay.stop();
         },
         //点击作品类别
         handleTabClick(type) {
@@ -92,7 +101,7 @@ var mixins = {
         worksSmallSwiperInit() {
             var that = this;
             this.$nextTick(function () {
-                new Swiper('.works-box .swiper-container', {
+                this.worksSmallSwiper = new Swiper('.works-box .swiper-container', {
                     on: {
                         //到了最后一个slide
                         reachEnd: function () {
@@ -104,12 +113,13 @@ var mixins = {
                     autoplay: {
                         delay: 5000,
                     },
-                    speed: 800,
+                    speed: 1000,
                     noSwiping: true,
                     noSwipingClass: 'stop-swiping',
-                    slidesPerView: 'auto',
-                    centeredSlides: true,
+                    //slidesPerView: 'auto',
+                    //centeredSlides: true,
                     spaceBetween: 20,
+                    slidesPerView: 5
                 });
             });
         },
@@ -119,7 +129,15 @@ var mixins = {
             this.$nextTick(function () {
                 this.worksBigSwiper = new Swiper('.tab-pane .swiper-container', {
                     on: {
+                        slideChangeTransitionStart: function () {
+                            clearInterval(that.maskFullTimer);
+                            console.log("swiper从当前slide开始过渡到另一个slide时执行");
+                        },
                         slideChangeTransitionEnd: function () {
+                            //clearTimeout(that.maskFullTimer);
+                            that.maskFullTimer = setInterval(function () {
+                                that.maskFull = false;
+                            }, 20 * 1000);
                             console.log('swiper从一个slide过渡到另一个slide结束时执行');
                         }
                     },
@@ -190,7 +208,7 @@ var mixins = {
                 });
             } else {
                 console.log("mac地址没有传过来");
-                //如果没能正确获取到mac地址
+                //如果没能正确获取到mac地址，也是重新请求
                 that.worksVisible = false; //loading
             }
         }
