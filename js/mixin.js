@@ -116,8 +116,6 @@ var mixins = {
                     speed: 1000,
                     noSwiping: true,
                     noSwipingClass: 'stop-swiping',
-                    //slidesPerView: 'auto',
-                    //centeredSlides: true,
                     spaceBetween: 20,
                     slidesPerView: 5
                 });
@@ -134,12 +132,15 @@ var mixins = {
                             console.log("swiper从当前slide开始过渡到另一个slide时执行");
                         },
                         slideChangeTransitionEnd: function () {
-                            //clearTimeout(that.maskFullTimer);
                             that.maskFullTimer = setInterval(function () {
                                 that.maskFull = false;
                             }, 20 * 1000);
                             console.log('swiper从一个slide过渡到另一个slide结束时执行');
                         }
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
                     },
                     slidesPerView: 1,
                     //真正的核心部分在
@@ -157,7 +158,7 @@ var mixins = {
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://192.168.18.253:8081/qxiao-cms/action/mod-xiaojiao/works/addPraise.do?worksId=" + obj.worksId,
+                    url: "http://120.77.233.111:8080/qxiao-cms/action/mod-xiaojiao/works/addPraise.do?worksId=" + obj.worksId,
                     success: function (res) {
                         if (res.parise || res.worksId) {
                             obj.praise = res.parise;
@@ -183,7 +184,7 @@ var mixins = {
                     timeout: 5000, // 添加timeout参数  
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://192.168.18.253:8081/qxiao-cms/action/mod-xiaojiao/works/queryWorksTerminal.do?mac=" + mac,
+                    url: "http://120.77.233.111:8080/qxiao-cms/action/mod-xiaojiao/works/queryWorksTerminal.do?mac=" + mac,
                     success: function (res) {
                         var data = res.detail;
                         if (data.length) {
@@ -208,8 +209,9 @@ var mixins = {
                 });
             } else {
                 console.log("mac地址没有传过来");
-                //如果没能正确获取到mac地址，也是重新请求
+                //如果没能正确获取到mac地址，则重新请求
                 that.worksVisible = false; //loading
+                that.queryWorksTerminal(that.mac);
             }
         }
     },

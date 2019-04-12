@@ -322,6 +322,7 @@ var vm = new Vue({
     mounted: function () {
         var that = this;
         this.init();
+        //"mac": "44:45:53:54:00:08",
         this.queryWorksTerminal(this.mac); //获取学生作品
         setInterval(function () {
             console.log("30秒刷新数据!");
