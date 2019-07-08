@@ -1,6 +1,6 @@
 var channels = {
     "schoolId": 125,
-    "mac": "48:d2:24:c2:1b:11",
+    "mac": "9c:ad:97:16:6e:83",
     "schoolname": "幼儿园",
     "scrollContents": [{
             "playTime": "2018-11-19",

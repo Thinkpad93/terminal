@@ -239,20 +239,21 @@ var vm = new Vue({
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
                     jsonpCallback: "success_jsonpCallback",
-                    url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
+                    url: "http://http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
                         req.data.nfcid,
                     success: function (res) {
-                        if (res.studentName) {
+                        if (res.status == 0) {
                             that.clockVisible = true;
                             that.student = res;
                             setTimeout(function () {
                                 that.clockVisible = false;
                             }, 4000);
+                        } else {
+                            layer.msg("打卡失败，请重新打卡");
                         }
                     },
                     error: function (res) {
                         that.clockVisible = false;
-                        //layer.msg("打卡不正常，请重新打卡");
                         console.log(JSON.stringify(res));
                     }
                 });
@@ -322,7 +323,7 @@ var vm = new Vue({
     mounted: function () {
         var that = this;
         this.init();
-        //"mac": "44:45:53:54:00:08",
+        //"mac": "44:45:53:54:00:08", 48:d2:24:c2:1b:11 
         this.queryWorksTerminal(this.mac); //获取学生作品
         setInterval(function () {
             console.log("30秒刷新数据!");
