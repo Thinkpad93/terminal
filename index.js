@@ -47,6 +47,7 @@ var vm = new Vue({
         },
         maskFull(newVal, oldVal) {
             if (newVal === false) {
+                console.log("false");
                 //用户点了作品类别，关闭大图模式查看后重新初始化列表
                 if (this.worksType !== 0) {
                     this.worksType = 0;
@@ -238,8 +239,8 @@ var vm = new Vue({
                     type: "GET",
                     dataType: "jsonp",
                     jsonp: "jsoncallback",
-                    jsonpCallback: "success_jsonpCallback",
-                    url: "http://http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
+                    jsonpCallback: "success_jsonpCallback", //192.168.18.199:8080 zc.qxiao.net
+                    url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
                         req.data.nfcid,
                     success: function (res) {
                         if (res.status == 0) {
@@ -249,7 +250,14 @@ var vm = new Vue({
                                 that.clockVisible = false;
                             }, 4000);
                         } else {
-                            layer.msg("打卡失败，请重新打卡");
+                            layer.alert('打卡失败，请重新打卡', {
+                                skin: 'layui-layer-molv', //样式类名
+                                title: "提示",
+                                closeBtn: 0,
+                                btn: [],
+                                time: 4000,
+                                area: ['500px', '300px']
+                            });
                         }
                     },
                     error: function (res) {

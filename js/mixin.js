@@ -161,11 +161,17 @@ var mixins = {
                     url: "http://120.77.233.111:8080/qxiao-cms/action/mod-xiaojiao/works/addPraise.do?worksId=" + obj.worksId,
                     success: function (res) {
                         if (res.parise || res.worksId) {
+                            //清除定时器
+                            clearInterval(that.maskFullTimer);
                             obj.praise = res.parise;
                             that.praiseVisible = true;
                             setTimeout(function () {
                                 that.praiseVisible = false;
                             }, 2000);
+                            //重新开启定时器
+                            that.maskFullTimer = setInterval(function () {
+                                that.maskFull = false;
+                            }, 20 * 1000);
                         }
                     },
                     error: function (res) {

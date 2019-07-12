@@ -353,7 +353,18 @@ img {
 
 
 
+.layui-layer-molv .layui-layer-title {
+    background: #009f95;
+    color: #fff;
+    border: none;
+    font-size: 24px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
+.layui-layer-molv .layui-layer-content {
+    font-size: 24px !important;
+}
 
 
 
