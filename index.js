@@ -34,6 +34,17 @@ var vm = new Vue({
         channelData: []
     },
     watch: {
+        //audio
+        'student.voice': {
+            handler: function (newPlaying, oldPlaying) {
+                console.log("audio的url, 如果有变化则重新播放");
+                var audio = this.$refs.audioRef;
+                this.$nextTick(function () {
+                    newPlaying ? audio.play() : audio.pause();
+                });
+            },
+            deep: true //深度监听
+        },
         //这里watch当前在显示的内容索引，从而初始化swiper
         channelContenIndex: function (newVal, oldVal) {
             this.swiperInit();
@@ -326,6 +337,10 @@ var vm = new Vue({
         //当网络访问不到时，加载图片出错事件
         handleError() {
             this.frameVisible = false;
+        },
+        //audio
+        handlePlaying(e) {
+            console.log("handlePlaying");
         }
     },
     mounted: function () {

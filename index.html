@@ -36,6 +36,8 @@
             <img v-else src="./child-default@2x.png">
             <p>你好,<strong id="uName">{{ student.studentName }}</strong>小朋友</p>
             <div class="time" id="time">{{ student.time }}</div>
+            <!-- audio -->
+            <audio ref="audioRef" :src="student.voice" autoplay @playing="handlePlaying"></audio>
           </div>
         </div>
       </div>
@@ -202,6 +204,7 @@
 <script src="./index.js"></script>
 <script>
   //window.ikepu_js = vm.ikepu_js;
+  //nfcid: B516D509
   //ikepu_js('{"data":{"nfcid":"E2C2441B7F"},"action":"nfc_login"}');
   //打卡函数调用
   function ikepu_js(params) {
