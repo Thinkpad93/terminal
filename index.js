@@ -13,6 +13,9 @@ var vm = new Vue({
         timer: null,
         timerScroll: null,
 
+        //打卡定时器
+        punchTimer: null,
+
         //学校名称
         schoolname: "",
         //学校mac地址
@@ -35,7 +38,7 @@ var vm = new Vue({
     },
     watch: {
         //audio
-        'student.voice': {
+        'student.studentVoice': {
             handler: function (newPlaying, oldPlaying) {
                 console.log("audio的url, 如果有变化则重新播放");
                 var audio = this.$refs.audioRef;
@@ -69,6 +72,10 @@ var vm = new Vue({
                 //开启小图的自己播放功能
                 this.worksSmallSwiper.autoplay.start();
             }
+        },
+        clockVisible(newVal, oldVal) {
+            alert("新值是:" + newVal);
+            alert("旧值是:" + oldVal);
         }
     },
     methods: {
@@ -242,42 +249,91 @@ var vm = new Vue({
         },
         //提供给APP调用接口
         ikepu_js(json_str) {
+            var d = new Date();
+            var year = d.getFullYear(), //年
+                mouth = this.fill(d.getMonth() + 1), //月
+                day = this.fill(d.getDate()); //日
+            var _locDate = year + "-" + mouth + "-" + day;
             var req = JSON.parse(json_str);
             var that = this;
+            this.student = {}; //先清空 
             //打卡类别 0-NFC打卡 1-ibeacon打卡
             if (req.action === "nfc_login") {
-                $.ajax({
-                    type: "GET",
-                    dataType: "jsonp",
-                    jsonp: "jsoncallback",
-                    jsonpCallback: "success_jsonpCallback", //192.168.18.199:8080 zc.qxiao.net
-                    url: "http://zc.qxiao.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
-                        req.data.nfcid,
-                    success: function (res) {
-                        if (res.status == 0) {
-                            that.clockVisible = true;
-                            that.student = res;
-                            setTimeout(function () {
-                                that.clockVisible = false;
-                            }, 4000);
-                        } else {
-                            layer.alert('打卡失败，请重新打卡', {
-                                skin: 'layui-layer-molv', //样式类名
-                                title: "提示",
-                                closeBtn: 0,
-                                btn: [],
-                                time: 4000,
-                                area: ['500px', '300px']
-                            });
-                        }
-                    },
-                    error: function (res) {
+                var obj = {
+                    nfcid: req.data.nfcid,
+                    studentName: req.data.studentName,
+                    studentImg: req.data.studentImg,
+                    studentVoice: req.data.studentVoice,
+                    time: _locDate + this.getNowDate()
+                }
+                if (obj.nfcid && obj.studentName) {
+                    alert("打卡成功");
+                    window.clearTimeout(this.punchTimer);
+                    this.clockVisible = true; //显示
+                    this.student = obj; //显示信息
+                    //4秒后自动关闭
+                    this.punchTimer = window.setTimeout(function () {
                         that.clockVisible = false;
-                        console.log(JSON.stringify(res));
-                    }
-                });
+                    }, 4000);
+                } else {
+                    //没有学生名称则打卡失败
+                    window.clearTimeout(this.punchTimer);
+                    alert("打卡失败");
+                    layer.alert('打卡失败，请重新打卡', {
+                        skin: 'layui-layer-molv', //样式类名
+                        title: "提示",
+                        closeBtn: 0,
+                        btn: [],
+                        time: 4000,
+                        area: ['500px', '300px']
+                    });
+                }
             }
         },
+        // ikepu_js(json_str) {
+        //     var req = JSON.parse(json_str);
+        //     var that = this;
+        //     //打卡类别 0-NFC打卡 1-ibeacon打卡
+        //     if (req.action === "nfc_login") {
+        //         $.ajax({
+        //             type: "GET",
+        //             dataType: "jsonp",
+        //             jsonp: "jsoncallback",
+        //             jsonpCallback: "success_jsonpCallback", //192.168.18.199:8080 zc.qxiao.net zc.qiaox.net
+        //             url: "http://zc.qiaox.net/qxiao-mp/action/mod-xiaojiao/clock/punchClock.do?nfcId=" +
+        //                 req.data.nfcid,
+        //             success: function (res) {
+        //                 window.clearTimeout(that.punchTimer);
+        //                 if (res.status == 0) {
+        //                     alert("打卡成功了");
+        //                     that.clockVisible = true;
+        //                     that.student = res;
+        //                     //4秒后自动关闭
+        //                     that.punchTimer = window.setTimeout(function () {
+        //                         that.clockVisible = false;
+        //                     }, 4000);
+
+        //                 } else {
+        //                     window.clearTimeout(that.punchTimer);
+        //                     alert("打卡失败了")
+        //                     layer.alert('打卡失败，请重新打卡', {
+        //                         skin: 'layui-layer-molv', //样式类名
+        //                         title: "提示",
+        //                         closeBtn: 0,
+        //                         btn: [],
+        //                         time: 4000,
+        //                         area: ['500px', '300px']
+        //                     });
+        //                 }
+        //             },
+        //             error: function (res) {
+        //                 window.clearTimeout(that.punchTimer);
+        //                 that.clockVisible = false;
+        //                 console.log(JSON.stringify(res));
+        //             }
+        //         });
+        //     }
+        // },
         //获取数据
         getSchoolData: function () {
             this.schoolname = channels.schoolname; //学校名称

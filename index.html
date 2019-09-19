@@ -32,12 +32,12 @@
       <div class="punchClock" v-show="clockVisible">
         <div class="clock">
           <div class="figure">
-            <img id="photo" v-if="student.photo" :src="student.photo">
+            <img id="photo" v-if="student.studentImg" :src="student.studentImg">
             <img v-else src="./child-default@2x.png">
             <p>你好,<strong id="uName">{{ student.studentName }}</strong>小朋友</p>
             <div class="time" id="time">{{ student.time }}</div>
             <!-- audio -->
-            <audio ref="audioRef" :src="student.voice" autoplay @playing="handlePlaying"></audio>
+            <audio ref="audioRef" :src="student.studentVoice" autoplay @playing="handlePlaying"></audio>
           </div>
         </div>
       </div>
