@@ -264,7 +264,7 @@ var vm = new Vue({
                     studentName: req.data.studentName,
                     studentImg: req.data.studentImg,
                     studentVoice: req.data.studentVoice,
-                    time: _locDate + this.getNowDate()
+                    time: _locDate + "" + this.getNowDate()
                 }
                 if (obj.nfcid && obj.studentName) {
                     alert("打卡成功");
@@ -279,6 +279,7 @@ var vm = new Vue({
                     //没有学生名称则打卡失败
                     window.clearTimeout(this.punchTimer);
                     alert("打卡失败");
+                    that.clockVisible = false;
                     layer.alert('打卡失败，请重新打卡', {
                         skin: 'layui-layer-molv', //样式类名
                         title: "提示",
