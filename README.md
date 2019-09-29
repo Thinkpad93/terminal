@@ -11,7 +11,7 @@ vue + axios + swiper
 - js
   - mixin.js 业务实现
   - 其它的 js 文件都是第三方库文件
-- local 当屏端出来网络断开的时候，显示要播放的图片
+- local 当屏端出现网络断开的时候，显示要播放的图片
 - theme layer.js 主题文件(暂时没有用到)
 - video 后端生成的视频文件夹，用于播放视频的时候访问该目录下的视频
 - child-default@2x.png 学生默认头像展示
